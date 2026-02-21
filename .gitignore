@@ -28,6 +28,9 @@ coverage/
 *.log
 npm-debug.log*
 
+# SQLite
+*.sqlite
+
 # Docker volumes
 pgdata/
 redisdata/

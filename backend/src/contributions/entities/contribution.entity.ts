@@ -20,21 +20,20 @@ export class Contribution {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   userId: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   missionId: string;
 
-  @Column({ type: 'enum', enum: ContributionType })
+  @Column({ type: 'varchar' })
   type: ContributionType;
 
   @Column({ type: 'text', nullable: true })
   message: string | null;
 
   @Column({
-    type: 'enum',
-    enum: ContributionStatus,
+    type: 'varchar',
     default: ContributionStatus.ACTIVE,
   })
   status: ContributionStatus;

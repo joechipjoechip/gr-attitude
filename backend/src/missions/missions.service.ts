@@ -74,12 +74,13 @@ export class MissionsService {
 
     if (filters.search) {
       qb.andWhere(
-        '(mission.title ILIKE :search OR mission.description ILIKE :search)',
+        '(LOWER(mission.title) LIKE LOWER(:search) OR LOWER(mission.description) LIKE LOWER(:search))',
         { search: `%${filters.search}%` },
       );
     }
 
-    if (filters.lat && filters.lng && filters.radiusKm) {
+    // Geo filtering: use PostGIS when available, skip on SQLite
+    if (filters.lat && filters.lng && filters.radiusKm && process.env.DB_TYPE === 'postgres') {
       qb.andWhere(
         `ST_DWithin(
           ST_SetSRID(ST_MakePoint(mission.locationLng, mission.locationLat), 4326)::geography,

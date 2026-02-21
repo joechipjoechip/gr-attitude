@@ -17,10 +17,10 @@ export class Notification {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   userId: string;
 
-  @Column({ type: 'enum', enum: NotificationType })
+  @Column({ type: 'varchar' })
   type: NotificationType;
 
   @Column({ type: 'varchar', length: 200 })
@@ -29,10 +29,10 @@ export class Notification {
   @Column({ type: 'text', nullable: true })
   body: string | null;
 
-  @Column({ type: 'enum', enum: ReferenceType, nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   referenceType: ReferenceType | null;
 
-  @Column({ type: 'uuid', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   referenceId: string | null;
 
   @Column({ type: 'boolean', default: false })

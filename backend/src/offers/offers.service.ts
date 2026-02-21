@@ -59,12 +59,13 @@ export class OffersService {
 
     if (filters.search) {
       qb.andWhere(
-        '(offer.title ILIKE :search OR offer.description ILIKE :search)',
+        '(LOWER(offer.title) LIKE LOWER(:search) OR LOWER(offer.description) LIKE LOWER(:search))',
         { search: `%${filters.search}%` },
       );
     }
 
-    if (filters.lat && filters.lng && filters.radiusKm) {
+    // Geo filtering: use PostGIS when available, skip on SQLite
+    if (filters.lat && filters.lng && filters.radiusKm && process.env.DB_TYPE === 'postgres') {
       qb.andWhere(
         `ST_DWithin(
           ST_SetSRID(ST_MakePoint(offer.locationLng, offer.locationLat), 4326)::geography,

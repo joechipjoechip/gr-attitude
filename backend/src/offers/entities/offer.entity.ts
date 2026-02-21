@@ -21,7 +21,7 @@ export class Offer {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   creatorId: string;
 
   @Column({ type: 'varchar', length: 120 })
@@ -30,13 +30,13 @@ export class Offer {
   @Column({ type: 'text' })
   description: string;
 
-  @Column({ type: 'enum', enum: MissionCategory })
+  @Column({ type: 'varchar' })
   category: MissionCategory;
 
-  @Column({ type: 'enum', enum: OfferType })
+  @Column({ type: 'varchar' })
   offerType: OfferType;
 
-  @Column({ type: 'enum', enum: Visibility, default: Visibility.PUBLIC })
+  @Column({ type: 'varchar', default: Visibility.PUBLIC })
   visibility: Visibility;
 
   @Column({ type: 'float', nullable: true })
@@ -48,7 +48,7 @@ export class Offer {
   @Column({ type: 'int', default: 10 })
   locationRadiusKm: number;
 
-  @Column({ type: 'enum', enum: OfferStatus, default: OfferStatus.OUVERTE })
+  @Column({ type: 'varchar', default: OfferStatus.OUVERTE })
   status: OfferStatus;
 
   @Column('simple-array')
@@ -60,10 +60,10 @@ export class Offer {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'datetime' })
   expiresAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   closedAt: Date | null;
 
   @ManyToOne(() => User, (user) => user.offers)

@@ -8,6 +8,17 @@ export default registerAs(
     const dbType = process.env.DB_TYPE || 'sqlite';
 
     if (dbType === 'postgres') {
+      // Support Render's DATABASE_URL or individual vars
+      if (process.env.DATABASE_URL) {
+        return {
+          type: 'postgres',
+          url: process.env.DATABASE_URL,
+          ssl: { rejectUnauthorized: false },
+          autoLoadEntities: true,
+          synchronize: true,
+        };
+      }
+
       return {
         type: 'postgres',
         host: process.env.DB_HOST || 'localhost',

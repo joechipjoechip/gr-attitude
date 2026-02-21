@@ -1,0 +1,42 @@
+databases:
+  - name: gr-attitude-db
+    plan: free
+    databaseName: gr_attitude
+    user: gr_user
+
+services:
+  # Backend API
+  - type: web
+    name: gr-attitude-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: node dist/main
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_TYPE
+        value: postgres
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gr-attitude-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://gr-attitude-web.onrender.com
+
+  # Frontend
+  - type: web
+    name: gr-attitude-web
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://gr-attitude-api.onrender.com

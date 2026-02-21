@@ -16,10 +16,10 @@ export class Correlation {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   missionId: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   offerId: string;
 
   @Column({ type: 'float' })

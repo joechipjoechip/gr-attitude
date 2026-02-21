@@ -23,7 +23,7 @@ export class Mission {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column()
   creatorId: string;
 
   @Column({ type: 'varchar', length: 120 })
@@ -32,16 +32,16 @@ export class Mission {
   @Column({ type: 'text' })
   description: string;
 
-  @Column({ type: 'enum', enum: MissionCategory })
+  @Column({ type: 'varchar' })
   category: MissionCategory;
 
-  @Column({ type: 'enum', enum: HelpType })
+  @Column({ type: 'varchar' })
   helpType: HelpType;
 
-  @Column({ type: 'enum', enum: Urgency })
+  @Column({ type: 'varchar' })
   urgency: Urgency;
 
-  @Column({ type: 'enum', enum: Visibility, default: Visibility.PUBLIC })
+  @Column({ type: 'varchar', default: Visibility.PUBLIC })
   visibility: Visibility;
 
   @Column({ type: 'float', nullable: true })
@@ -53,7 +53,7 @@ export class Mission {
   @Column({ type: 'int', default: 10 })
   locationRadiusKm: number;
 
-  @Column({ type: 'enum', enum: MissionStatus, default: MissionStatus.OUVERTE })
+  @Column({ type: 'varchar', default: MissionStatus.OUVERTE })
   status: MissionStatus;
 
   @Column({ type: 'int', default: 0 })
@@ -65,10 +65,10 @@ export class Mission {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'datetime' })
   expiresAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   closedAt: Date | null;
 
   @Column({ type: 'text', nullable: true })

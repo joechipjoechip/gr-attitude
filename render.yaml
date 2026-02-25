@@ -1,7 +1,7 @@
 services:
   # Backend NestJS API
   - type: web
-    name: gr-attitude-backend
+    name: gr-attitude-api
     runtime: node
     region: frankfurt
     plan: free

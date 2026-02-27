@@ -192,6 +192,37 @@ this.eventsGateway.sendToUser(userId, 'match:new', {
 
 ---
 
+## Analytics & Monitoring
+
+### Sentry Integration
+
+GR-attitude uses **Sentry** for error tracking and performance monitoring.
+
+**Features**:
+- Error tracking (automatic exception capture)
+- Performance monitoring (API response times)
+- User context tracking
+- Session replay (frontend - privacy-safe)
+- Custom event tracking (AnalyticsService)
+
+**Setup**:
+```bash
+# Backend .env
+SENTRY_DSN=https://your-dsn@sentry.io/project-id
+
+# Frontend .env.local
+NEXT_PUBLIC_SENTRY_DSN=https://your-dsn@sentry.io/project-id
+```
+
+**Sample rates** (production):
+- Transactions: 10%
+- Errors: 100%
+- Session replays: 10% (100% on errors)
+
+**Documentation:** See [`ANALYTICS.md`](./ANALYTICS.md) for full setup guide.
+
+---
+
 ## Authentication & Session Lifecycle
 
 ### JWT-Based Authentication

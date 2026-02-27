@@ -210,18 +210,86 @@ _Rien en cours._
 
 ---
 
+#### 8. User Profile Completion (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** `9f99c77`
+
+**Implementation:**
+- ✅ User entity extended (skills, interests, bio, availabilityHours, maxDistanceKm, preferences)
+- ✅ TypeORM migration AddUserProfileFields
+- ✅ UpdateProfileDto with validation (max lengths, array sizes)
+- ✅ PATCH /users/me/profile endpoint
+- ✅ GET /users/me/profile-completion endpoint (calculates % completion)
+- ✅ Matching V2.1: Skills bonus (10 points) ⭐ **NEW**
+  - Boost score if offer creator skills match mission tags
+  - Max score: 110 points (up from 100)
+- ✅ Frontend: /profile/edit page with tag inputs (skills, interests)
+
+**Impact:** Better matching with skills, user engagement through profile completion ✅
+
+---
+
+#### 9. Search & Filters (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** `af7fb27`
+
+**Implementation:**
+- ✅ SearchMissionsDto with full validation
+- ✅ search() method in MissionsService:
+  - Full-text search (title + description)
+  - Filters: category, urgency, status, visibility
+  - Geographic filtering (bounding box for SQLite)
+  - Sorting: createdAt, expiresAt, urgency (ASC/DESC)
+  - Pagination support
+- ✅ GET /missions/search endpoint (60 req/min limit)
+- ✅ Frontend: SearchFilters component (shadcn/ui)
+
+**Impact:** Better mission discovery, flexible filtering ✅
+
+---
+
+#### 10. Analytics & Monitoring (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** (pending)
+
+**Implementation:**
+- ✅ Sentry backend integration (@sentry/node)
+- ✅ Sentry frontend integration (@sentry/nextjs)
+- ✅ Error tracking (automatic + manual)
+- ✅ Performance monitoring (10% sample rate in prod)
+- ✅ Session replay (frontend, privacy-safe: text/media masked)
+- ✅ AnalyticsService (custom event tracking)
+- ✅ User context tracking (set on login, clear on logout)
+- ✅ Documentation: `ANALYTICS.md` (full setup guide)
+
+**Features**:
+- Automatic exception capture
+- API response time tracking
+- Custom events (match:created, contribution:created)
+- Session replay on errors (100%)
+
+**Impact:** Production-ready monitoring, error tracking, performance insights ✅
+
+---
+
 ## 📋 Backlog
 
 ### High Priority
 - [x] Rate limiting & caching
 - [x] Matching algorithm V2 (scoring pondéré)
 - [x] Real-time notifications (WebSocket)
+- [x] User profile completion (skills, preferences)
+- [x] Search & filters (missions/offers)
+- [x] Analytics & monitoring (Sentry integration)
 - [ ] Add Facebook OAuth (postponed)
 
 ### Medium Priority
-- [ ] User profile completion (skills, preferences)
-- [ ] Search & filters (missions/offers)
-- [ ] Analytics & monitoring (Sentry integration)
 
 ### Low Priority
 - [ ] i18n (French/English)

@@ -49,9 +49,16 @@ Accès :
 - **[backend/RATE_LIMITING.md](./backend/RATE_LIMITING.md)** — Stratégie rate limiting
 - **[backend/MATCHING.md](./backend/MATCHING.md)** — Algorithme matching V2.1
 - **[backend/WEBSOCKET.md](./backend/WEBSOCKET.md)** — Guide WebSocket real-time
-- **[backend/ANALYTICS.md](./backend/ANALYTICS.md)** — Monitoring Sentry ⭐ **NEW**
+- **[backend/ANALYTICS.md](./backend/ANALYTICS.md)** — Monitoring Sentry
 - **[backend/MIGRATIONS.md](./backend/MIGRATIONS.md)** — Guide migrations TypeORM
 - **[backend/ERROR_HANDLING.md](./backend/ERROR_HANDLING.md)** — Gestion erreurs
+
+### Documentation Frontend ⭐ **NEW**
+- **[frontend/MOBILE.md](./frontend/MOBILE.md)** — Mobile optimization guide
+- **[frontend/PWA.md](./frontend/PWA.md)** — Progressive Web App setup
+
+### Documentation Infrastructure ⭐ **NEW**
+- **[.github/README.md](./.github/README.md)** — CI/CD GitHub Actions guide
 
 ### Documentation Architecture
 - **[docs/](./docs)** — Documentation technique détaillée
@@ -171,7 +178,7 @@ npm run lint
 
 ## 📊 État du projet
 
-**Phase actuelle** : ✅ **Production-Ready & Enhanced** (2026-02-27)
+**Phase actuelle** : ✅ **Production-Ready & PWA-Enabled** (2026-02-27)
 
 ### Backend ✅
 - [x] Auth (JWT + OAuth Google/Facebook)
@@ -179,37 +186,38 @@ npm run lint
 - [x] **Matching V2.1** (7 facteurs + skills bonus) ⭐ **ENHANCED**
 - [x] **Rate Limiting** (Throttler 5-60 req/min par endpoint)
 - [x] **WebSocket** (Socket.io real-time notifications)
-- [x] **User Profile Completion** (skills, preferences, matching) ⭐ **NEW**
-- [x] **Advanced Search & Filters** (full-text + multi-criteria) ⭐ **NEW**
-- [x] **Analytics & Monitoring** (Sentry integration) ⭐ **NEW**
+- [x] **User Profile Completion** (skills, preferences, matching)
+- [x] **Advanced Search & Filters** (full-text + multi-criteria)
+- [x] **Analytics & Monitoring** (Sentry integration)
 - [x] Notifications (DB + real-time)
 - [x] Crons (expiration, rappels)
 - [x] **TypeORM migrations** (synchronize:false, migrationsRun:true)
-- [x] **Tests E2E** (51/51 passing ✅)
+- [x] **Tests E2E** (73/73 passing ✅) ⭐ **UPDATED**
 - [x] **Tests unitaires** (8 matching tests ✅)
 - [x] Error handling standardized
-- [ ] CI/CD
+- [x] **CI/CD GitHub Actions** ⭐ **NEW**
 
 ### Frontend ✅
 - [x] Pages auth (login, register, callback)
 - [x] Pages missions (liste, détail, création wizard)
 - [x] Pages offers
-- [x] **Profile edit** (skills, interests, preferences) ⭐ **NEW**
-- [x] **Search filters** (category, urgency, status, sort) ⭐ **NEW**
+- [x] **Profile edit** (skills, interests, preferences)
+- [x] **Search filters** (category, urgency, status, sort)
 - [x] Notifications
 - [x] **WebSocket client** (auto-connect, toast, cache invalidation)
 - [x] **Cache optimisé** (5min stale, 10min cache)
-- [x] **Sentry error tracking** (session replay) ⭐ **NEW**
+- [x] **Sentry error tracking** (session replay)
+- [x] **Mobile responsive** (touch-friendly, single-column mobile) ⭐ **NEW**
+- [x] **PWA** (installable, offline-ready, Service Worker) ⭐ **NEW**
 - [x] 15+ hooks React Query
 - [ ] Tests (Vitest)
-- [ ] Responsive mobile optimisé
 
 ### Infrastructure
 - [x] Docker Compose local
 - [x] **Déployé sur Render.com** (prod running ✅)
 - [x] TypeORM migrations automatiques
-- [x] **Monitoring** (Sentry) ⭐ **NEW**
-- [ ] CI/CD GitHub Actions
+- [x] **Monitoring** (Sentry)
+- [x] **CI/CD GitHub Actions** ⭐ **NEW**
 
 ---
 
@@ -258,5 +266,5 @@ Projet privé — Tous droits réservés.
 ---
 
 **Dernière mise à jour** : 2026-02-27  
-**Version** : Production-Ready & Enhanced (Priorité 3 complete)  
+**Version** : Production-Ready & PWA-Enabled (Priorité 4A complete)  
 **Auteur** : Équipe GR attitude

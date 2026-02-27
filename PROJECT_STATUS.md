@@ -1,7 +1,7 @@
 # GR-Attitude — Project Status
 
-> **Last updated:** 2026-02-27 17:10 GMT+1  
-> **Last commit:** `b63eab0` - feat: implement analytics & monitoring with Sentry
+> **Last updated:** 2026-02-27 17:30 GMT+1  
+> **Last commit:** `33d1881` - feat: implement Progressive Web App (PWA) support
 
 ---
 
@@ -275,6 +275,104 @@ _Rien en cours._
 - Session replay on errors (100%)
 
 **Impact:** Production-ready monitoring, error tracking, performance insights ✅
+
+---
+
+#### 11. CI/CD GitHub Actions (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** `21d2e81`
+
+**Implementation:**
+- ✅ GitHub Actions workflow (`.github/workflows/ci.yml`)
+- ✅ Backend pipeline: lint, build, unit tests, E2E tests (73 tests)
+- ✅ Frontend pipeline: lint, build
+- ✅ Auto-deploy to Render (via secrets, master branch only)
+- ✅ Node.js 22, npm ci for reproducibility
+- ✅ CI/CD badge in README
+- ✅ Documentation: `.github/README.md`
+
+**Jobs**:
+1. backend-test (lint, build, test, E2E)
+2. frontend-test (lint, build)
+3. deploy-backend (Render webhook, optional)
+4. deploy-frontend (Render webhook, optional)
+
+**Impact:** Automated testing, safe deployments ✅
+
+---
+
+#### 12. E2E Tests (Priorité 3 features) (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** `d70db8f`
+
+**Implementation:**
+- ✅ 22 new E2E tests → 73/73 total passing ✅
+- ✅ profile.e2e-spec.ts (8 tests):
+  - Update skills, interests, bio, availability
+  - Profile completion percentage
+  - Validation (limits, max length)
+- ✅ search.e2e-spec.ts (14 tests):
+  - Full-text search (title + description)
+  - Filters (category, urgency, status)
+  - Sorting (createdAt, expiresAt, ASC/DESC)
+  - Pagination complète
+  - Validation inputs
+- ✅ Fix: Validate sortBy field (prevent SQL injection)
+
+**Impact:** Full test coverage for Priorité 3 features ✅
+
+---
+
+#### 13. Mobile Responsive (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** `c1f4d5c`
+
+**Implementation:**
+- ✅ Responsive layouts:
+  - Missions page: 1 col mobile, 2 cols tablet, 3 cols desktop
+  - Profile edit: Full-width buttons mobile, auto desktop
+  - SearchFilters: Stacked mobile, grid desktop
+- ✅ Touch-friendly inputs:
+  - Button heights: 44px (h-11) mobile for WCAG compliance
+  - Icon buttons: 44x44px minimum
+  - Input font-size: text-base (16px) prevents iOS auto-zoom
+  - Full-width buttons mobile (w-full sm:w-auto)
+- ✅ Spacing improvements (px-4 sm:px-6, py-4 sm:py-8)
+- ✅ Documentation: `MOBILE.md` (7716 bytes)
+
+**Impact:** Mobile-first UX, touch-friendly, responsive ✅
+
+---
+
+#### 14. Progressive Web App (PWA) (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** `33d1881`
+
+**Implementation:**
+- ✅ next-pwa integration (Service Worker auto-generation)
+- ✅ manifest.json (installable on home screen)
+- ✅ Display mode: standalone (no browser UI)
+- ✅ Theme color + viewport config
+- ✅ Apple Web App mode
+- ✅ Offline-ready (cached assets)
+- ✅ Automatic updates (Service Worker)
+- ✅ Documentation: `PWA.md` (8215 bytes)
+
+**Features**:
+- Installable on iOS Safari + Android Chrome
+- App-like experience (full-screen)
+- Offline support (basic)
+- Auto-updates on next visit
+
+**Impact:** App-like experience, installable, offline-ready ✅
 
 ---
 

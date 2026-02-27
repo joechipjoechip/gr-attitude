@@ -22,7 +22,7 @@ export default function Error({
         <AlertTriangle className="mx-auto h-16 w-16 text-destructive" />
         <h1 className="text-3xl font-bold">Erreur serveur</h1>
         <p className="text-muted-foreground">
-          {error.message || 'Une erreur inattendue s'est produite.'}
+          {error.message || "Une erreur inattendue s'est produite."}
         </p>
         {error.digest && (
           <p className="text-xs text-muted-foreground">

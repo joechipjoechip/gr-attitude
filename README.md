@@ -44,9 +44,10 @@ Accès :
 
 ### Documentation Backend ⭐ **UPDATED**
 - **[backend/README.md](./backend/README.md)** — Guide complet backend
-- **[backend/RATE_LIMITING.md](./backend/RATE_LIMITING.md)** — Stratégie rate limiting ⭐ **NEW**
-- **[backend/MATCHING.md](./backend/MATCHING.md)** — Algorithme matching V2 ⭐ **NEW**
-- **[backend/WEBSOCKET.md](./backend/WEBSOCKET.md)** — Guide WebSocket real-time ⭐ **NEW**
+- **[backend/RATE_LIMITING.md](./backend/RATE_LIMITING.md)** — Stratégie rate limiting
+- **[backend/MATCHING.md](./backend/MATCHING.md)** — Algorithme matching V2.1
+- **[backend/WEBSOCKET.md](./backend/WEBSOCKET.md)** — Guide WebSocket real-time
+- **[backend/ANALYTICS.md](./backend/ANALYTICS.md)** — Monitoring Sentry ⭐ **NEW**
 - **[backend/MIGRATIONS.md](./backend/MIGRATIONS.md)** — Guide migrations TypeORM
 - **[backend/ERROR_HANDLING.md](./backend/ERROR_HANDLING.md)** — Gestion erreurs
 
@@ -68,8 +69,10 @@ Accès :
 - **Base de données** : SQLite (production) + TypeORM migrations
 - **Auth** : Passport (JWT + OAuth2 Google/Facebook)
 - **Sécurité** : bcrypt, Helmet, **Throttler (rate limiting)** ⭐
-- **Real-time** : **Socket.io** (WebSocket notifications) ⭐ **NEW**
-- **Matching** : Algorithme V2 (scoring pondéré 6 facteurs) ⭐ **ENHANCED**
+- **Real-time** : **Socket.io** (WebSocket notifications) ⭐
+- **Matching** : Algorithme V2.1 (7 facteurs + skills) ⭐ **ENHANCED**
+- **Search** : Full-text + multi-criteria filters ⭐ **NEW**
+- **Monitoring** : **Sentry** (error tracking + performance) ⭐ **NEW**
 
 ### Frontend
 - **Framework** : Next.js 16.1.6 + React 19.2.3
@@ -166,18 +169,21 @@ npm run lint
 
 ## 📊 État du projet
 
-**Phase actuelle** : ✅ **Production-Ready** (2026-02-27)
+**Phase actuelle** : ✅ **Production-Ready & Enhanced** (2026-02-27)
 
 ### Backend ✅
 - [x] Auth (JWT + OAuth Google/Facebook)
 - [x] CRUD Missions + Offers + Contributions
-- [x] **Matching V2** (scoring pondéré 6 facteurs + urgency/timing) ⭐ **NEW**
-- [x] **Rate Limiting** (Throttler 5-60 req/min par endpoint) ⭐ **NEW**
-- [x] **WebSocket** (Socket.io real-time notifications) ⭐ **NEW**
+- [x] **Matching V2.1** (7 facteurs + skills bonus) ⭐ **ENHANCED**
+- [x] **Rate Limiting** (Throttler 5-60 req/min par endpoint)
+- [x] **WebSocket** (Socket.io real-time notifications)
+- [x] **User Profile Completion** (skills, preferences, matching) ⭐ **NEW**
+- [x] **Advanced Search & Filters** (full-text + multi-criteria) ⭐ **NEW**
+- [x] **Analytics & Monitoring** (Sentry integration) ⭐ **NEW**
 - [x] Notifications (DB + real-time)
 - [x] Crons (expiration, rappels)
 - [x] **TypeORM migrations** (synchronize:false, migrationsRun:true)
-- [x] **Tests E2E** (51/51 passing ✅) — auth, JWT (12 tests), missions (20 tests)
+- [x] **Tests E2E** (51/51 passing ✅)
 - [x] **Tests unitaires** (8 matching tests ✅)
 - [x] Error handling standardized
 - [ ] CI/CD
@@ -186,10 +192,12 @@ npm run lint
 - [x] Pages auth (login, register, callback)
 - [x] Pages missions (liste, détail, création wizard)
 - [x] Pages offers
-- [x] Profile utilisateur
+- [x] **Profile edit** (skills, interests, preferences) ⭐ **NEW**
+- [x] **Search filters** (category, urgency, status, sort) ⭐ **NEW**
 - [x] Notifications
-- [x] **WebSocket client** (auto-connect, toast, cache invalidation) ⭐ **NEW**
-- [x] **Cache optimisé** (5min stale, 10min cache, no refetch on focus) ⭐ **NEW**
+- [x] **WebSocket client** (auto-connect, toast, cache invalidation)
+- [x] **Cache optimisé** (5min stale, 10min cache)
+- [x] **Sentry error tracking** (session replay) ⭐ **NEW**
 - [x] 15+ hooks React Query
 - [ ] Tests (Vitest)
 - [ ] Responsive mobile optimisé
@@ -198,8 +206,8 @@ npm run lint
 - [x] Docker Compose local
 - [x] **Déployé sur Render.com** (prod running ✅)
 - [x] TypeORM migrations automatiques
+- [x] **Monitoring** (Sentry) ⭐ **NEW**
 - [ ] CI/CD GitHub Actions
-- [ ] Monitoring (Prometheus/Grafana)
 
 ---
 
@@ -248,5 +256,5 @@ Projet privé — Tous droits réservés.
 ---
 
 **Dernière mise à jour** : 2026-02-27  
-**Version** : Production-Ready (Priorité 2 complete)  
+**Version** : Production-Ready & Enhanced (Priorité 3 complete)  
 **Auteur** : Équipe GR attitude

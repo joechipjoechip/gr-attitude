@@ -1,11 +1,11 @@
 # GR-Attitude — Project Status
 
-> **Last updated:** 2026-02-27 12:30 GMT+1  
-> **Last commit:** `2f66ff0` - feat: comprehensive error handling (backend + frontend)
+> **Last updated:** 2026-02-27 14:50 GMT+1  
+> **Last commit:** `a803cca` - fix(tests): repair all 9 failed missions E2E tests
 
 ---
 
-## 🎯 Current State: **Production Hardening DONE** ✅
+## 🎯 Current State: **Production-Ready** ✅
 
 ### ✅ Completed Features
 
@@ -78,6 +78,30 @@ CORS_ORIGIN=https://gr-attitude-frontend.onrender.com
   - ✅ Comprehensive guide: `frontend/ERROR_HANDLING.md`
 - **Impact:** Errors handled consistently across stack ✅
 
+#### 4. E2E Tests Suite Complete (2026-02-27)
+
+**Status:** ✅ All tests passing
+
+**Commit:** `a803cca`
+
+**Fixes applied:**
+- ✅ Added `expiresAt` validation in `CreateMissionDto` (required field)
+- ✅ Fixed test enum values (DEMENAGEMENT, MOYEN, MATERIEL vs invalid English/AIDE_A_LA_PERSONNE)
+- ✅ Fixed userId extraction from register response (`user.id`)
+- ✅ Updated GET /missions tests to handle paginated response (`{ data, total, ... }`)
+- ✅ Fixed close mission tests to use correct DTO fields (`closureFeedback`, `closureThanks`)
+- ✅ Added backend validation: prevent closing already closed missions (403 Forbidden)
+- ✅ Fixed app.e2e-spec health check response
+
+**Test coverage:**
+- **Backend E2E:** 51/51 tests passing ✅
+  - Auth tests (login, register, OAuth)
+  - JWT session tests (validation, expiration, persistence)
+  - Missions tests (CRUD, filtering, pagination, close)
+  - Health check
+
+**Impact:** Full E2E coverage, production-ready test suite ✅
+
 ---
 
 ## 🚧 Work in Progress
@@ -97,11 +121,6 @@ _Rien en cours._
 - [ ] User profile completion (skills, preferences)
 - [ ] Search & filters (missions/offers)
 - [ ] Analytics & monitoring (Sentry integration)
-
-### Low Priority
-- [ ] i18n (French/English)
-- [ ] Dark mode
-- [ ] Email notifications
 
 ### Low Priority
 - [ ] i18n (French/English)

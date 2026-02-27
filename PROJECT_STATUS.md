@@ -141,11 +141,44 @@ _Rien en cours._
 
 ---
 
+#### 6. Matching Algorithm V2 (2026-02-27)
+
+**Status:** ✅ Complete
+
+**Commit:** (pending)
+
+**Implementation:**
+- ✅ Enhanced weighted scoring algorithm (6 factors, 100 points max)
+  - Tag overlap: 25 points (down from 30)
+  - Category match: 20 points (down from 25)
+  - Help type mapping: 20 points (down from 25)
+  - Geographic proximity: 20 points (unchanged)
+  - **NEW** Urgency bonus: 10 points (urgent: +10, moyen: +5, faible: 0)
+  - **NEW** Timing match: 5 points (expiring <7 days: +5, <30 days: +3)
+- ✅ Improved `getSuggestionsForUser` with better sorting
+- ✅ Documentation: `MATCHING.md` (full algorithm guide)
+- ✅ Unit tests: 8/8 passing (matching.service.spec.ts)
+  - Base score computation
+  - Urgency bonus validation
+  - Timing bonus validation
+  - Score threshold filtering (< 10 filtered)
+  - Geographic distance handling
+  - User suggestion sorting
+
+**Testing:**
+- All unit tests passing ✅
+- Scoring correctly weights urgency and timing
+- Low-score matches filtered out (< 10 threshold)
+
+**Impact:** Better mission-offer matches, urgent missions prioritized, improved UX ✅
+
+---
+
 ## 📋 Backlog
 
 ### High Priority
 - [x] Rate limiting & caching
-- [ ] Matching algorithm V2 (scoring pondéré)
+- [x] Matching algorithm V2 (scoring pondéré)
 - [ ] Real-time notifications (WebSocket)
 - [ ] Add Facebook OAuth (postponed)
 

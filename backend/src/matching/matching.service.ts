@@ -9,6 +9,7 @@ import {
   OfferStatus,
   HelpType,
   OfferType,
+  Urgency,
 } from '../shared/enums';
 
 @Injectable()
@@ -32,29 +33,40 @@ export class MatchingService {
     return mapping[helpType] || [];
   }
 
+  /**
+   * Matching Algorithm V2 - Weighted scoring with urgency and timing
+   *
+   * Scoring breakdown (100 points max):
+   * - Tag overlap: 25 points
+   * - Category match: 20 points
+   * - Help type mapping: 20 points
+   * - Geographic proximity: 20 points
+   * - Urgency bonus: 10 points
+   * - Timing match: 5 points
+   */
   private computeScore(mission: Mission, offer: Offer): number {
     let score = 0;
 
-    // Tag overlap (weight: 30)
+    // 1. Tag overlap (weight: 25, down from 30 to make room for urgency/timing)
     const missionTags = mission.tags || [];
     const offerTags = offer.tags || [];
     const overlap = missionTags.filter((t) => offerTags.includes(t));
     if (missionTags.length > 0 && overlap.length > 0) {
-      score += 30 * (overlap.length / missionTags.length);
+      score += 25 * (overlap.length / missionTags.length);
     }
 
-    // Category match (weight: 25)
+    // 2. Category match (weight: 20, down from 25)
     if (mission.category === offer.category) {
-      score += 25;
+      score += 20;
     }
 
-    // Help type mapping (weight: 25)
+    // 3. Help type mapping (weight: 20, down from 25)
     const matchingTypes = this.helpTypeToOfferType(mission.helpType);
     if (matchingTypes.includes(offer.offerType)) {
-      score += 25;
+      score += 20;
     }
 
-    // Geographic proximity (weight: 20)
+    // 4. Geographic proximity (weight: 20, unchanged)
     if (
       mission.locationLat != null &&
       mission.locationLng != null &&
@@ -74,6 +86,32 @@ export class MatchingService {
       if (dist <= maxRadius) {
         score += 20 * (1 - dist / maxRadius);
       }
+    }
+
+    // 5. Urgency bonus (NEW - weight: 10)
+    // More urgent missions get higher priority
+    if (mission.urgency === Urgency.URGENT) {
+      score += 10;
+    } else if (mission.urgency === Urgency.MOYEN) {
+      score += 5;
+    }
+    // Urgency.FAIBLE = no bonus
+
+    // 6. Timing match (NEW - weight: 5)
+    // Missions expiring soon should match with offers that can help quickly
+    if (mission.expiresAt) {
+      const now = new Date();
+      const expiresAt = new Date(mission.expiresAt);
+      const daysLeft = (expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
+
+      if (daysLeft > 0 && daysLeft <= 7) {
+        // Mission expires within a week - high urgency
+        score += 5;
+      } else if (daysLeft > 7 && daysLeft <= 30) {
+        // Expires within a month - moderate urgency
+        score += 3;
+      }
+      // Expired or far future = no timing bonus
     }
 
     return Math.round(score * 100) / 100;
@@ -138,12 +176,31 @@ export class MatchingService {
     return results;
   }
 
+  /**
+   * Get personalized matching suggestions for a user
+   *
+   * Algorithm:
+   * 1. Find all user's open offers
+   * 2. Score each open mission against each offer
+   * 3. Filter low scores (< 10)
+   * 4. Sort by score (descending)
+   * 5. Return top 20 matches
+   *
+   * @param userId - User ID to get suggestions for
+   * @returns Array of mission/offer pairs with scores, sorted by relevance
+   */
   async getSuggestionsForUser(userId: string) {
-    // Find user's open offers and see which missions match
+    // Find user's open offers
     const userOffers = await this.offersRepository.find({
       where: { creatorId: userId, status: OfferStatus.OUVERTE },
     });
 
+    // If user has no offers, return empty suggestions
+    if (userOffers.length === 0) {
+      return [];
+    }
+
+    // Find all open missions (excluding user's own)
     const openMissions = await this.missionsRepository.find({
       where: { status: MissionStatus.OUVERTE },
       relations: ['creator'],
@@ -155,30 +212,25 @@ export class MatchingService {
       score: number;
     }> = [];
 
+    // Score each mission against each offer
     for (const offer of userOffers) {
       for (const mission of openMissions) {
+        // Don't suggest user's own missions
         if (mission.creatorId === userId) continue;
+
         const score = this.computeScore(mission, offer);
+
+        // Only keep meaningful matches (score >= 10)
         if (score >= 10) {
           suggestions.push({ mission, offer, score });
         }
       }
     }
 
-    // Also find missions that match user's profile - get missions not created by user
-    const matchingMissions = openMissions
-      .filter((m) => m.creatorId !== userId)
-      .slice(0, 10);
+    // Sort by score (best matches first)
+    suggestions.sort((a, b) => b.score - a.score);
 
-    // Deduplicate: keep suggestions + any missions not already in suggestions
-    const suggestedMissionIds = new Set(suggestions.map((s) => s.mission.id));
-    const additionalMissions = matchingMissions
-      .filter((m) => !suggestedMissionIds.has(m.id))
-      .map((m) => ({ mission: m, offer: null as Offer | null, score: 0 }));
-
-    const all = [...suggestions, ...additionalMissions];
-    all.sort((a, b) => b.score - a.score);
-
-    return all.slice(0, 20);
+    // Return top 20 suggestions
+    return suggestions.slice(0, 20);
   }
 }

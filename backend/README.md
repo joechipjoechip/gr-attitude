@@ -131,6 +131,38 @@ npm run test:rate-limits    # Manual test script
 
 ---
 
+## Matching Algorithm V2
+
+### Weighted Scoring System
+
+GR-attitude uses a **multi-factor scoring algorithm** to match missions with offers.
+
+**Scoring factors (100 points max):**
+- Tag overlap: 25 points
+- Category match: 20 points
+- Help type mapping: 20 points
+- Geographic proximity: 20 points
+- Urgency bonus: 10 points (NEW in V2)
+- Timing match: 5 points (NEW in V2)
+
+**Minimum threshold**: 10 points (lower scores filtered out)
+
+**Example**:
+- Urgent déménagement mission expiring in 5 days
+- Matching offer in same city with shared tags
+- **Score**: ~85/100 ✅
+
+**API**: `GET /matching/suggestions` (30 req/min limit)
+
+**Testing**:
+```bash
+npm test -- matching.service.spec.ts    # 8 unit tests
+```
+
+**Documentation:** See [`MATCHING.md`](./MATCHING.md) for full algorithm details.
+
+---
+
 ## Authentication & Session Lifecycle
 
 ### JWT-Based Authentication

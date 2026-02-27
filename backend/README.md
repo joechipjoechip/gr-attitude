@@ -181,3 +181,45 @@ npm run test:e2e -- jwt.e2e-spec
 1. Ensure frontend saves token immediately after login
 2. Check browser localStorage (DevTools → Application → Local Storage)
 3. Verify OAuth callback extracts token from `window.location.hash`
+
+## Database Migrations
+
+GR-attitude uses **TypeORM migrations** for production-safe schema management.
+
+### Quick Commands
+
+```bash
+# Generate a migration after modifying entities
+npm run migration:generate -- src/migrations/YourMigrationName
+
+# Run pending migrations (auto-run in production)
+npm run migration:run
+
+# Revert last migration (dev/staging only)
+npm run migration:revert
+```
+
+### Configuration
+
+- **Development:** `synchronize: true` → auto-sync entities to DB (fast iteration)
+- **Production:** `synchronize: false` + `migrationsRun: true` → controlled, versioned changes
+
+**Files:**
+- `src/data-source.ts` — DataSource CLI config
+- `src/migrations/` — Migration files (timestamped)
+- `MIGRATIONS.md` — Complete workflow guide
+
+**Initial migration:** `1772190361842-InitialSchema.ts` (6 entities: users, missions, offers, contributions, correlations, notifications)
+
+### Migration Workflow
+
+1. Modify an entity file (e.g., add a field)
+2. Generate migration: `npm run migration:generate -- src/migrations/AddUserBio`
+3. Review generated SQL in `src/migrations/`
+4. Test locally: `npm run migration:run`
+5. Commit migration file
+6. Deploy → migrations auto-run on startup ✅
+
+**Important:** All schema changes in production MUST go through migrations (no manual DB edits).
+
+See `MIGRATIONS.md` for detailed guide.

@@ -61,10 +61,12 @@ async function bootstrap() {
 
   // Auto-seed demo data if DB is empty (resilient to ephemeral disk resets)
   try {
-    const seedService = app.get(SeedService);
-    const status = await seedService.status();
-    if (status.users === 0 && status.missions === 0) {
+    const { DataSource } = await import('typeorm');
+    const ds = app.get(DataSource);
+    const userCount = await ds.query('SELECT COUNT(*) as cnt FROM users').catch(() => [{ cnt: 0 }]);
+    if (Number(userCount[0]?.cnt) === 0) {
       logger.log('Empty database detected — auto-seeding demo data...');
+      const seedService = app.get(SeedService);
       const result = await seedService.seed();
       logger.log(`Auto-seed complete: ${JSON.stringify(result.stats)}`);
     }

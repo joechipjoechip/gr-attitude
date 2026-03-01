@@ -207,8 +207,14 @@ export class MissionsService {
   }
 
   async create(userId: string, dto: CreateMissionDto): Promise<Mission> {
-    const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 30);
+    // Use provided expiresAt or default to +30 days
+    const expiresAt = dto.expiresAt
+      ? new Date(dto.expiresAt)
+      : (() => {
+          const defaultDate = new Date();
+          defaultDate.setDate(defaultDate.getDate() + 30);
+          return defaultDate;
+        })();
 
     const mission = this.missionsRepository.create({
       ...dto,

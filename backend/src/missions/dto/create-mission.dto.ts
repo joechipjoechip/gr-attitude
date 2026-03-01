@@ -55,6 +55,7 @@ export class CreateMissionDto {
   @IsString({ each: true })
   tags?: string[];
 
+  @IsOptional()
   @IsDateString()
-  expiresAt: string;
+  expiresAt?: string;
 }

@@ -7,8 +7,8 @@ import * as path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const dataSource = new DataSource({
-  type: 'sqlite',
-  database: process.env.DATABASE_PATH || './data/gr-attitude.db',
+  type: 'better-sqlite3',
+  database: process.env.DATABASE_PATH || './gr_attitude.sqlite',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: false,
   logging: false,

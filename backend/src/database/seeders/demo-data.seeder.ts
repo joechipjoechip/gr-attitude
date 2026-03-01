@@ -19,19 +19,19 @@ const demoUsers = [
   {
     email: 'demo.alice@gr-attitude.test',
     displayName: 'Alice Martin',
-    bio: 'Développeuse web passionnée par l'entraide locale. Compétences en React, Node.js.',
-    skills: ['développement web', 'react', 'javascript', 'design'],
+    bio: 'Developpeuse web passionnee par l\'entraide locale. Competences en React, Node.js.',
+    skills: ['developpement web', 'react', 'javascript', 'design'],
     interests: ['technologie', 'jardinage', 'cuisine'],
     locationLat: 48.8566,
-    locationLng: 2.3522, // Paris
+    locationLng: 2.3522,
     isPremium: false,
     isDemo: true,
   },
   {
     email: 'demo.bob@gr-attitude.test',
     displayName: 'Bob Durand',
-    bio: 'Bricoleur chevronné et retraité disponible pour dépanner.',
-    skills: ['bricolage', 'électricité', 'plomberie'],
+    bio: 'Bricoleur chevronne et retraite disponible pour depanner.',
+    skills: ['bricolage', 'electricite', 'plomberie'],
     interests: ['bricolage', 'jardinage', 'marche'],
     locationLat: 48.8566,
     locationLng: 2.3522,
@@ -41,31 +41,31 @@ const demoUsers = [
   {
     email: 'demo.claire@gr-attitude.test',
     displayName: 'Claire Dubois',
-    bio: 'Professeure de français, j'aime aider les jeunes à progresser.',
-    skills: ['français', 'soutien scolaire', 'rédaction'],
-    interests: ['littérature', 'musique', 'randonnée'],
+    bio: 'Professeure de francais, j\'aime aider les jeunes a progresser.',
+    skills: ['francais', 'soutien scolaire', 'redaction'],
+    interests: ['litterature', 'musique', 'randonnee'],
     locationLat: 45.764,
-    locationLng: 4.8357, // Lyon
+    locationLng: 4.8357,
     isPremium: false,
     isDemo: true,
   },
   {
     email: 'demo.david@gr-attitude.test',
     displayName: 'David Petit',
-    bio: 'Graphiste freelance, disponible pour des conseils créatifs.',
+    bio: 'Graphiste freelance, disponible pour des conseils creatifs.',
     skills: ['design graphique', 'photoshop', 'illustration'],
-    interests: ['art', 'photographie', 'café'],
+    interests: ['art', 'photographie', 'cafe'],
     locationLat: 43.2965,
-    locationLng: 5.3698, // Marseille
+    locationLng: 5.3698,
     isPremium: true,
     isDemo: true,
   },
   {
     email: 'demo.emma@gr-attitude.test',
     displayName: 'Emma Rousseau',
-    bio: 'Étudiante en médecine, j'adore cuisiner et partager mes recettes.',
+    bio: 'Etudiante en medecine, j\'adore cuisiner et partager mes recettes.',
     skills: ['cuisine', 'nutrition', 'organisation'],
-    interests: ['santé', 'sport', 'cuisine'],
+    interests: ['sante', 'sport', 'cuisine'],
     locationLat: 48.8566,
     locationLng: 2.3522,
     isPremium: false,
@@ -75,37 +75,34 @@ const demoUsers = [
 
 const demoMissions = [
   {
-    title: 'Aide pour déménagement ce week-end',
-    description:
-      'Je cherche 2-3 personnes pour m'aider à déménager un canapé et quelques cartons. Pas d'étages, rez-de-chaussée. Je fournis les boissons et pizzas !',
+    title: 'Aide pour demenagement ce week-end',
+    description: 'Je cherche 2-3 personnes pour m\'aider a demenager un canape et quelques cartons. Pas d\'etages, rez-de-chaussee. Je fournis les boissons et pizzas !',
     category: MissionCategory.TRANSPORT,
-    helpType: HelpType.AIDE_PONCTUELLE,
+    helpType: HelpType.MATERIEL,
     urgency: Urgency.URGENT,
     visibility: Visibility.PUBLIC,
-    tags: ['déménagement', 'force', 'week-end'],
+    tags: ['demenagement', 'force', 'week-end'],
     locationLat: 48.8566,
     locationLng: 2.3522,
     status: MissionStatus.OUVERTE,
     isDemo: true,
   },
   {
-    title: 'Recherche accompagnement pour rendez-vous médical',
-    description:
-      'Personne âgée cherche quelqu'un pour l'accompagner à un rendez-vous chez le cardiologue mardi prochain à 14h.',
-    category: MissionCategory.SANTE,
-    helpType: HelpType.ACCOMPAGNEMENT,
+    title: 'Recherche accompagnement pour rendez-vous medical',
+    description: 'Personne agee cherche quelqu\'un pour l\'accompagner a un rendez-vous chez le cardiologue mardi prochain a 14h.',
+    category: MissionCategory.TRANSPORT,
+    helpType: HelpType.RELATION,
     urgency: Urgency.MOYEN,
     visibility: Visibility.PUBLIC,
-    tags: ['santé', 'accompagnement', 'personnes âgées'],
+    tags: ['sante', 'accompagnement', 'personnes agees'],
     locationLat: 48.8566,
     locationLng: 2.3522,
     status: MissionStatus.OUVERTE,
     isDemo: true,
   },
   {
-    title: 'Besoin d'aide pour réparer un robinet qui fuit',
-    description:
-      'Le robinet de ma cuisine fuit depuis hier. Je n'y connais rien en plomberie. Quelqu'un peut m'aider ou me conseiller ?',
+    title: 'Besoin d\'aide pour reparer un robinet qui fuit',
+    description: 'Le robinet de ma cuisine fuit depuis hier. Je n\'y connais rien en plomberie. Quelqu\'un peut m\'aider ou me conseiller ?',
     category: MissionCategory.BRICOLAGE,
     helpType: HelpType.CONSEIL,
     urgency: Urgency.MOYEN,
@@ -117,28 +114,26 @@ const demoMissions = [
     isDemo: true,
   },
   {
-    title: 'Soutien scolaire en maths pour collégien',
-    description:
-      'Mon fils (13 ans) a du mal en maths. Recherche quelqu'un pour l'aider 1h par semaine, niveau 4ème.',
+    title: 'Soutien scolaire en maths pour collegien',
+    description: 'Mon fils (13 ans) a du mal en maths. Recherche quelqu\'un pour l\'aider 1h par semaine, niveau 4eme.',
     category: MissionCategory.EDUCATION,
-    helpType: HelpType.FORMATION,
-    urgency: Urgency.PAS_URGENT,
+    helpType: HelpType.CONSEIL,
+    urgency: Urgency.FAIBLE,
     visibility: Visibility.PUBLIC,
-    tags: ['soutien scolaire', 'maths', 'collège'],
+    tags: ['soutien scolaire', 'maths', 'college'],
     locationLat: 43.2965,
     locationLng: 5.3698,
     status: MissionStatus.OUVERTE,
     isDemo: true,
   },
   {
-    title: 'Aide pour créer un site web simple',
-    description:
-      'Je voudrais créer un petit site vitrine pour mon activité artisanale. Cherche quelqu'un pour me guider ou m'aider.',
+    title: 'Aide pour creer un site web simple',
+    description: 'Je voudrais creer un petit site vitrine pour mon activite artisanale. Cherche quelqu\'un pour me guider ou m\'aider.',
     category: MissionCategory.NUMERIQUE,
     helpType: HelpType.CONSEIL,
-    urgency: Urgency.PAS_URGENT,
+    urgency: Urgency.FAIBLE,
     visibility: Visibility.PUBLIC,
-    tags: ['web', 'numérique', 'artisanat'],
+    tags: ['web', 'numerique', 'artisanat'],
     locationLat: 48.8566,
     locationLng: 2.3522,
     status: MissionStatus.EN_COURS,
@@ -147,13 +142,12 @@ const demoMissions = [
   },
   {
     title: 'Recherche compagnie pour promenade quotidienne',
-    description:
-      'Personne âgée cherche quelqu'un pour discuter et se promener 30 minutes par jour dans le quartier.',
-    category: MissionCategory.SOCIAL,
-    helpType: HelpType.ACCOMPAGNEMENT,
+    description: 'Personne agee cherche quelqu\'un pour discuter et se promener 30 minutes par jour dans le quartier.',
+    category: MissionCategory.ECOUTE,
+    helpType: HelpType.RELATION,
     urgency: Urgency.MOYEN,
     visibility: Visibility.PUBLIC,
-    tags: ['social', 'promenade', 'personnes âgées'],
+    tags: ['social', 'promenade', 'personnes agees'],
     locationLat: 48.8566,
     locationLng: 2.3522,
     status: MissionStatus.OUVERTE,
@@ -163,13 +157,12 @@ const demoMissions = [
 
 const demoOffers = [
   {
-    title: 'Cours de français gratuits pour adultes',
-    description:
-      'Je propose des cours de français langue étrangère ou aide à la rédaction. Disponible les mercredis après-midi.',
+    title: 'Cours de francais gratuits pour adultes',
+    description: 'Je propose des cours de francais langue etrangere ou aide a la redaction. Disponible les mercredis apres-midi.',
     category: MissionCategory.EDUCATION,
     offerType: OfferType.COMPETENCE,
     visibility: Visibility.PUBLIC,
-    tags: ['français', 'cours', 'gratuit'],
+    tags: ['francais', 'cours', 'gratuit'],
     availability: 'Mercredis 14h-18h',
     locationLat: 45.764,
     locationLng: 4.8357,
@@ -178,13 +171,12 @@ const demoOffers = [
   },
   {
     title: 'Aide au bricolage et petits travaux',
-    description:
-      'Retraité disponible pour donner un coup de main en bricolage : montage meubles, petite électricité, etc.',
+    description: 'Retraite disponible pour donner un coup de main en bricolage : montage meubles, petite electricite, etc.',
     category: MissionCategory.BRICOLAGE,
-    offerType: OfferType.TEMPS,
+    offerType: OfferType.COMPETENCE,
     visibility: Visibility.PUBLIC,
-    tags: ['bricolage', 'électricité', 'aide'],
-    availability: 'Flexible, week-ends préférés',
+    tags: ['bricolage', 'electricite', 'aide'],
+    availability: 'Flexible, week-ends preferes',
     locationLat: 48.8566,
     locationLng: 2.3522,
     status: OfferStatus.OUVERTE,
@@ -192,8 +184,7 @@ const demoOffers = [
   },
   {
     title: 'Design graphique et retouche photo',
-    description:
-      'Graphiste pro propose aide pour créer logos, flyers ou retoucher photos. Premier conseil gratuit.',
+    description: 'Graphiste pro propose aide pour creer logos, flyers ou retoucher photos. Premier conseil gratuit.',
     category: MissionCategory.NUMERIQUE,
     offerType: OfferType.COMPETENCE,
     visibility: Visibility.PUBLIC,
@@ -205,13 +196,12 @@ const demoOffers = [
     isDemo: true,
   },
   {
-    title: 'Prêt d'outils de jardinage',
-    description:
-      'Je prête tondeuse, taille-haie, bêche, râteau. Disponible pour voisins du quartier.',
+    title: 'Pret d\'outils de jardinage',
+    description: 'Je prete tondeuse, taille-haie, beche, rateau. Disponible pour voisins du quartier.',
     category: MissionCategory.AUTRE,
     offerType: OfferType.MATERIEL,
     visibility: Visibility.PUBLIC,
-    tags: ['jardinage', 'prêt', 'outils'],
+    tags: ['jardinage', 'pret', 'outils'],
     availability: 'Sur demande',
     locationLat: 48.8566,
     locationLng: 2.3522,
@@ -267,14 +257,14 @@ export async function seedDemoData(dataSource: DataSource): Promise<void> {
 
   // 4. Create some demo contributions
   console.log('  → Creating demo contributions...');
-  const contributions = [];
+  const contributions: Contribution[] = [];
 
-  // Mission 0: déménagement → 2 interested
+  // Mission 0: demenagement → 2 interested
   contributions.push(
     contributionRepo.create({
-      userId: users[1].id, // Bob (bricoleur)
+      userId: users[1].id,
       missionId: missions[0].id,
-      type: ContributionType.INTERESTED,
+      type: ContributionType.PARTICIPE,
       message: 'Je suis dispo samedi matin ! 💪',
       status: ContributionStatus.ACTIVE,
       isDemo: true,
@@ -282,10 +272,10 @@ export async function seedDemoData(dataSource: DataSource): Promise<void> {
   );
   contributions.push(
     contributionRepo.create({
-      userId: users[3].id, // David
+      userId: users[3].id,
       missionId: missions[0].id,
-      type: ContributionType.INTERESTED,
-      message: 'Je peux venir aider, j'ai une camionnette.',
+      type: ContributionType.PARTICIPE,
+      message: 'Je peux venir aider, j\'ai une camionnette.',
       status: ContributionStatus.ACTIVE,
       isDemo: true,
     }),
@@ -294,10 +284,10 @@ export async function seedDemoData(dataSource: DataSource): Promise<void> {
   // Mission 2: plomberie → 1 volunteer
   contributions.push(
     contributionRepo.create({
-      userId: users[1].id, // Bob (bricoleur)
+      userId: users[1].id,
       missionId: missions[2].id,
-      type: ContributionType.VOLUNTEER,
-      message: 'Je passe demain après-midi avec mes outils !',
+      type: ContributionType.PARTICIPE,
+      message: 'Je passe demain apres-midi avec mes outils !',
       status: ContributionStatus.ACTIVE,
       isDemo: true,
     }),
@@ -306,10 +296,10 @@ export async function seedDemoData(dataSource: DataSource): Promise<void> {
   // Mission 4: site web → 1 volunteer (Alice dev)
   contributions.push(
     contributionRepo.create({
-      userId: users[0].id, // Alice (dev web)
+      userId: users[0].id,
       missionId: missions[4].id,
-      type: ContributionType.VOLUNTEER,
-      message: 'Je peux t'aider à créer un site avec un template gratuit.',
+      type: ContributionType.PARTICIPE,
+      message: 'Je peux t\'aider a creer un site avec un template gratuit.',
       status: ContributionStatus.ACTIVE,
       isDemo: true,
     }),

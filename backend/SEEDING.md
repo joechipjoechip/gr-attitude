@@ -94,15 +94,13 @@ Voir [docs/SEEDING_GUIDE.md](../docs/SEEDING_GUIDE.md) pour la liste complète d
 
 ---
 
-## Utilisation en Production (Render)
+## Auto-seed en Production
 
-1. Render Dashboard → `gr-attitude-api` → **Shell**
-2. Attendre la connexion au terminal
-3. Exécuter :
-   ```bash
-   curl -X POST http://localhost:3001/seed
-   ```
-4. Vérifier les données sur le frontend : https://gr-attitude-frontend.onrender.com/missions
+**Depuis le commit `87c9bf1`, le seeding est automatique.**
+
+Au démarrage du backend (`main.ts`), si la table `users` est vide, les données démo sont injectées automatiquement. Sur Render free tier (disque éphémère), cela se produit à chaque redéploiement.
+
+Le seeding manuel via `POST /seed` reste disponible si besoin.
 
 ---
 

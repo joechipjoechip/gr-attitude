@@ -118,11 +118,15 @@ cd frontend && npm run dev          # http://localhost:3000
 
 ### Database
 
-Current: **SQLite** (local file-based database)
-- Dev DB: `backend/dev.db` (created automatically)
-- Seeding: `npm run seed` in backend/
+Current: **SQLite** (better-sqlite3) in dev and production.
+- Dev DB: auto-created with `synchronize: true`
+- Prod DB: auto-created with `synchronize: true` + auto-seed on empty DB
+- **Render free tier = ephemeral disk** → DB is reset on every redeploy
+- Schema is always rebuilt from entities (no migrations needed for SQLite)
+- Demo data (5 users, 6 missions, 4 offers) is auto-seeded at startup if DB is empty
+- Seeding endpoints: `POST /seed`, `POST /seed/clear`, `GET /seed/status`
 
-Future (Production): **PostgreSQL + PostGIS** recommended for geospatial queries and scalability.
+Future (Production): **PostgreSQL + PostGIS** recommended (re-enable `migrationsRun: true`, set `synchronize: false`).
 
 ### OAuth Setup
 
@@ -213,15 +217,15 @@ Main resource groups:
   - Functions/variables: camelCase
   - Files: kebab-case for pages, PascalCase for components
 
+### Deployment
+
+- **Render free tier** with auto-deploy on git push to fork `caracole-ai/gr-attitude`
+- Push workflow: `git push origin master && git push fork master`
+- Backend: `synchronize: true` for SQLite (schema from entities), auto-seed on empty DB
+- See `docs/deployment.md` for full details
+
 ## Documentation
 
-- **Technical docs**: `/docs` directory (12 files covering architecture, API, DTOs, etc.)
+- **Technical docs**: `/docs` directory (architecture, API, DTOs, deployment, etc.)
 - **Product spec**: `PRD.md` (comprehensive product requirements)
-- **Audit**: `AUDIT-WINSTON-2026-02-23.md` (architecture review and recommendations)
-
-## Support
-
-For questions or issues:
-1. Check `docs/` for technical documentation
-2. Review `PRD.md` for product specifications
-3. Consult `AUDIT-WINSTON-2026-02-23.md` for architecture insights
+- **Deployment**: `docs/deployment.md` (Render setup, DB strategy, env vars)

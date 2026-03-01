@@ -57,6 +57,22 @@ async function bootstrap() {
   const port = process.env.PORT || 3001;
   await app.listen(port);
   logger.log(`Application running on port ${port}`);
+
+  // Auto-seed demo data if DB is empty (resilient to ephemeral disk resets)
+  try {
+    const { SeedService } = await import('./seed/seed.service');
+    const seedService = app.get(SeedService, { strict: false });
+    if (seedService) {
+      const status = await seedService.status();
+      if (status.users === 0 && status.missions === 0) {
+        logger.log('Empty database detected — auto-seeding demo data...');
+        const result = await seedService.seed();
+        logger.log(`Auto-seed complete: ${JSON.stringify(result.stats)}`);
+      }
+    }
+  } catch (err) {
+    logger.warn(`Auto-seed skipped: ${err.message}`);
+  }
 }
 bootstrap().catch((err) => {
   console.error('Failed to start application:', err);

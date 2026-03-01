@@ -42,6 +42,9 @@ export function MobileNav() {
           <Link href="/offers" onClick={close} className="text-sm font-medium py-2">
             Offres
           </Link>
+          <Link href="/faq" onClick={close} className="text-sm font-medium py-2">
+            FAQ
+          </Link>
           <Separator />
           {isAuthenticated ? (
             <>

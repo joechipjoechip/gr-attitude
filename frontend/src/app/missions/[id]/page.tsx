@@ -1,17 +1,23 @@
 'use client';
 
 import { use } from 'react';
-import { Clock, MapPin, Tag } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Clock, MapPin, Tag, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { MissionProgress } from '@/components/missions/MissionProgress';
 import { ContributionButtons } from '@/components/missions/ContributionButtons';
 import { CloseMissionDialog } from '@/components/missions/CloseMissionDialog';
+import { EditMissionDialog } from '@/components/missions/EditMissionDialog';
 import { useMission } from '@/hooks/useMission';
 import { useContributions } from '@/hooks/useContributions';
 import { useAuth } from '@/hooks/useAuth';
+import { missionsApi } from '@/lib/api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import {
   CATEGORY_LABELS,
   URGENCY_LABELS,
@@ -54,9 +60,29 @@ export default function MissionDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const router = useRouter();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const { data: mission, isLoading } = useMission(id);
   const { data: contributions } = useContributions(id);
+
+  const deleteMission = useMutation({
+    mutationFn: () => missionsApi.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['missions'] });
+      toast.success('Mission supprimee !');
+      router.push('/missions');
+    },
+    onError: (error) => {
+      toast.error(error instanceof Error ? error.message : 'Erreur');
+    },
+  });
+
+  const handleDelete = () => {
+    if (window.confirm('Supprimer cette mission ? Cette action est irreversible.')) {
+      deleteMission.mutate();
+    }
+  };
 
   if (isLoading) {
     return (
@@ -154,10 +180,20 @@ export default function MissionDetailPage({
         </div>
       )}
 
-      {/* Creator action */}
-      {isCreator && isOpen && (
-        <div>
-          <CloseMissionDialog missionId={mission.id} />
+      {/* Creator actions */}
+      {isCreator && (
+        <div className="flex flex-wrap gap-2">
+          {isOpen && <CloseMissionDialog missionId={mission.id} />}
+          <EditMissionDialog mission={mission} />
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={handleDelete}
+            disabled={deleteMission.isPending}
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            {deleteMission.isPending ? 'Suppression...' : 'Supprimer'}
+          </Button>
         </div>
       )}
 

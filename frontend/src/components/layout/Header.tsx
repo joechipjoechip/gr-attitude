@@ -33,6 +33,9 @@ export function Header() {
             <Link href="/offers" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Offres
             </Link>
+            <Link href="/faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              FAQ
+            </Link>
           </nav>
         </div>
 

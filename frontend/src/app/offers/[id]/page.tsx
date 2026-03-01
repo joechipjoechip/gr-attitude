@@ -3,7 +3,7 @@
 import { use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { MapPin, Tag, Calendar } from 'lucide-react';
+import { MapPin, Tag, Calendar, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useOffer } from '@/hooks/useOffer';
 import { useAuth } from '@/hooks/useAuth';
 import { offersApi } from '@/lib/api';
+import { EditOfferDialog } from '@/components/offers/EditOfferDialog';
 import {
   OFFER_TYPE_LABELS,
   CATEGORY_LABELS,
@@ -19,7 +20,7 @@ import {
   OfferStatus,
 } from '@/lib/types';
 import { toast } from 'sonner';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const OFFER_TYPE_COLORS: Record<OfferType, string> = {
   don: 'bg-blue-100 text-blue-800 hover:bg-blue-100',
@@ -51,6 +52,7 @@ export default function OfferDetailPage({
   const { id } = use(params);
   const router = useRouter();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const { data: offer, isLoading } = useOffer(id);
   const { data: correlations } = useQuery({
     queryKey: ['offer-correlations', id],
@@ -65,6 +67,24 @@ export default function OfferDetailPage({
       router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Erreur');
+    }
+  };
+
+  const deleteOffer = useMutation({
+    mutationFn: () => offersApi.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['offers'] });
+      toast.success('Offre supprimee !');
+      router.push('/offers');
+    },
+    onError: (error) => {
+      toast.error(error instanceof Error ? error.message : 'Erreur');
+    },
+  });
+
+  const handleDelete = () => {
+    if (window.confirm("Supprimer cette offre ? Cette action est irreversible.")) {
+      deleteOffer.mutate();
     }
   };
 
@@ -157,11 +177,23 @@ export default function OfferDetailPage({
         )}
       </div>
 
-      {/* Creator close action */}
-      {isCreator && isOpen && (
-        <div>
-          <Button variant="outline" onClick={handleClose} className="w-full">
-            Cloturer cette offre
+      {/* Creator actions */}
+      {isCreator && (
+        <div className="flex flex-wrap gap-2">
+          {isOpen && (
+            <Button variant="outline" onClick={handleClose}>
+              Cloturer cette offre
+            </Button>
+          )}
+          <EditOfferDialog offer={offer} />
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={handleDelete}
+            disabled={deleteOffer.isPending}
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            {deleteOffer.isPending ? 'Suppression...' : 'Supprimer'}
           </Button>
         </div>
       )}

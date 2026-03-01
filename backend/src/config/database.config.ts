@@ -41,8 +41,6 @@ export default registerAs('database', (): TypeOrmModuleOptions => {
   }
 
   // Allow FORCE_SYNC=true to create tables in production (emergency only)
-  const forceSync = process.env.FORCE_SYNC === 'true';
-  
   return {
     type: 'better-sqlite3',
     database: join(process.cwd(), 'gr_attitude.sqlite'),

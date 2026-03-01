@@ -6,6 +6,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export default registerAs('database', (): TypeOrmModuleOptions => {
   const dbType = process.env.DB_TYPE || 'sqlite';
+  const forceSync = process.env.FORCE_SYNC === 'true';
 
   if (dbType === 'postgres') {
     // Support Render's DATABASE_URL or individual vars
@@ -17,9 +18,10 @@ export default registerAs('database', (): TypeOrmModuleOptions => {
           ? { rejectUnauthorized: false }
           : false,
         autoLoadEntities: true,
-        synchronize: !isProduction, // Dev: auto-sync | Prod: migrations
-        migrationsRun: isProduction, // Auto-run migrations in production
+        synchronize: forceSync || !isProduction,
+        migrationsRun: !forceSync && isProduction,
         migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
+        logging: process.env.DB_LOGGING === 'true',
       };
     }
 
@@ -31,18 +33,23 @@ export default registerAs('database', (): TypeOrmModuleOptions => {
       password: process.env.DB_PASSWORD || 'gr_password',
       database: process.env.DB_DATABASE || 'gr_attitude',
       autoLoadEntities: true,
-      synchronize: !isProduction, // Dev: auto-sync | Prod: migrations
-      migrationsRun: isProduction, // Auto-run migrations in production
+      synchronize: forceSync || !isProduction,
+      migrationsRun: !forceSync && isProduction,
       migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
+      logging: process.env.DB_LOGGING === 'true',
     };
   }
 
+  // Allow FORCE_SYNC=true to create tables in production (emergency only)
+  const forceSync = process.env.FORCE_SYNC === 'true';
+  
   return {
     type: 'better-sqlite3',
     database: join(process.cwd(), 'gr_attitude.sqlite'),
     autoLoadEntities: true,
-    synchronize: !isProduction, // Dev: auto-sync | Prod: migrations
-    migrationsRun: isProduction, // Auto-run migrations in production
+    synchronize: forceSync || !isProduction, // Dev: auto-sync | Prod: migrations | Emergency: FORCE_SYNC=true
+    migrationsRun: !forceSync && isProduction, // Auto-run migrations in production (unless FORCE_SYNC)
     migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
+    logging: process.env.DB_LOGGING === 'true', // Enable with DB_LOGGING=true
   };
 });

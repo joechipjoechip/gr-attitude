@@ -35,7 +35,24 @@ export class SeedService {
     };
   }
 
+  private async ensureTables() {
+    // Check if tables exist
+    const tables = await this.dataSource.query(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='user'"
+    ).catch(() => []);
+
+    if (tables.length === 0) {
+      // Tables don't exist, sync schema
+      console.log('[Seed] No tables found, synchronizing schema...');
+      await this.dataSource.synchronize(false);
+      console.log('[Seed] Schema synchronized successfully');
+    }
+  }
+
   async seed() {
+    // Ensure tables exist before seeding
+    await this.ensureTables();
+    
     // Clear existing demo data
     await this.clear();
 

@@ -251,10 +251,10 @@ export class SeedService {
   }
 
   async clear() {
-    await this.dataSource.query('DELETE FROM contribution WHERE isDemo = true');
-    await this.dataSource.query('DELETE FROM offer WHERE isDemo = true');
-    await this.dataSource.query('DELETE FROM mission WHERE isDemo = true');
-    await this.dataSource.query('DELETE FROM user WHERE isDemo = true');
+    await this.dataSource.query('DELETE FROM contributions WHERE isDemo = true');
+    await this.dataSource.query('DELETE FROM offers WHERE isDemo = true');
+    await this.dataSource.query('DELETE FROM missions WHERE isDemo = true');
+    await this.dataSource.query('DELETE FROM users WHERE isDemo = true');
 
     return {
       success: true,

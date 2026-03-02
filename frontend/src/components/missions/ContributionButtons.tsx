@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { HandHelping, Lightbulb, Coins, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -20,44 +19,46 @@ import {
 } from '@/lib/types';
 import { toast } from 'sonner';
 
-const CONTRIBUTION_CONFIG: Record<
-  ContributionType,
-  {
-    icon: typeof HandHelping;
-    gradient: string;
-    hoverGradient: string;
-    glow: string;
-    emoji: string;
-  }
-> = {
-  [ContributionType.PARTICIPE]: {
-    icon: HandHelping,
-    gradient: 'linear-gradient(135deg, oklch(0.55 0.16 260), oklch(0.5 0.18 280))',
-    hoverGradient: 'linear-gradient(135deg, oklch(0.5 0.18 260), oklch(0.45 0.2 280))',
-    glow: '0 4px 20px oklch(0.55 0.16 260 / 30%)',
-    emoji: '🤝',
-  },
-  [ContributionType.PROPOSE]: {
-    icon: Lightbulb,
-    gradient: 'linear-gradient(135deg, oklch(0.55 0.18 280), oklch(0.5 0.16 320))',
-    hoverGradient: 'linear-gradient(135deg, oklch(0.5 0.2 280), oklch(0.45 0.18 320))',
-    glow: '0 4px 20px oklch(0.55 0.18 280 / 30%)',
-    emoji: '💡',
-  },
-  [ContributionType.FINANCE]: {
-    icon: Coins,
-    gradient: 'linear-gradient(135deg, oklch(0.55 0.14 170), oklch(0.5 0.16 150))',
-    hoverGradient: 'linear-gradient(135deg, oklch(0.5 0.16 170), oklch(0.45 0.18 150))',
-    glow: '0 4px 20px oklch(0.55 0.14 170 / 30%)',
-    emoji: '💰',
-  },
-  [ContributionType.CONSEILLE]: {
-    icon: MessageCircle,
-    gradient: 'linear-gradient(135deg, oklch(0.6 0.14 80), oklch(0.55 0.16 60))',
-    hoverGradient: 'linear-gradient(135deg, oklch(0.55 0.16 80), oklch(0.5 0.18 60))',
-    glow: '0 4px 20px oklch(0.6 0.14 80 / 30%)',
-    emoji: '🧭',
-  },
+/* Illustrative SVGs — soft, hand-drawn feel */
+const CONTRIBUTION_SVG: Record<ContributionType, React.ReactNode> = {
+  [ContributionType.PARTICIPE]: (
+    <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.15"/>
+      <path d="M16 24c0-2 1.5-6 8-6s8 4 8 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <circle cx="20" cy="20" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+      <circle cx="28" cy="20" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+      <path d="M20 32s2 3 4 3 4-3 4-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    </svg>
+  ),
+  [ContributionType.PROPOSE]: (
+    <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 6c-7.18 0-13 5.82-13 13 0 4.83 2.63 9.05 6.53 11.31V38a2 2 0 002 2h8.94a2 2 0 002-2v-7.69C34.37 28.05 37 23.83 37 19c0-7.18-5.82-13-13-13z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <path d="M20 40h8M22 44h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M24 14v6m-3-3h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.6"/>
+    </svg>
+  ),
+  [ContributionType.FINANCE]: (
+    <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.15"/>
+      <path d="M24 10v28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M30 18c0-2.76-2.69-5-6-5s-6 2.24-6 5c0 4 12 2.5 12 7 0 2.76-2.69 5-6 5s-6-2.24-6-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    </svg>
+  ),
+  [ContributionType.CONSEILLE]: (
+    <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 10h24a4 4 0 014 4v14a4 4 0 01-4 4H18l-6 6v-6H8a4 4 0 01-4-4V14a4 4 0 014-4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <path d="M14 20h16M14 25h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+      <circle cx="38" cy="16" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.3"/>
+      <path d="M36 16l1.5 1.5L40 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    </svg>
+  ),
+};
+
+const CONTRIBUTION_BORDER_COLORS: Record<ContributionType, string> = {
+  [ContributionType.PARTICIPE]: 'oklch(0.55 0.16 260)',
+  [ContributionType.PROPOSE]: 'oklch(0.55 0.18 280)',
+  [ContributionType.FINANCE]: 'oklch(0.55 0.14 170)',
+  [ContributionType.CONSEILLE]: 'oklch(0.6 0.14 80)',
 };
 
 interface ContributionButtonsProps {
@@ -91,8 +92,7 @@ export function ContributionButtons({ missionId }: ContributionButtonsProps) {
     <>
       <div className="grid grid-cols-2 gap-3">
         {Object.values(ContributionType).map((type) => {
-          const config = CONTRIBUTION_CONFIG[type];
-          const Icon = config.icon;
+          const borderColor = CONTRIBUTION_BORDER_COLORS[type];
           const isHovered = hoveredType === type;
           return (
             <button
@@ -100,27 +100,31 @@ export function ContributionButtons({ missionId }: ContributionButtonsProps) {
               onClick={() => setOpenType(type)}
               onMouseEnter={() => setHoveredType(type)}
               onMouseLeave={() => setHoveredType(null)}
-              className="group relative overflow-hidden rounded-xl px-4 py-3.5 text-white font-semibold text-sm transition-all duration-300 ease-out cursor-pointer"
+              className="group relative flex flex-col items-center gap-2 rounded-2xl px-4 py-4 cursor-pointer select-none transition-all duration-300 ease-out"
               style={{
-                background: isHovered ? config.hoverGradient : config.gradient,
-                boxShadow: isHovered ? config.glow : '0 2px 8px oklch(0.5 0.1 280 / 10%)',
-                transform: isHovered ? 'translateY(-2px) scale(1.02)' : 'translateY(0) scale(1)',
+                background: isHovered
+                  ? `oklch(0.98 0.005 280 / 80%)`
+                  : 'oklch(0.99 0.003 280 / 40%)',
+                backdropFilter: 'blur(12px) saturate(1.4)',
+                WebkitBackdropFilter: 'blur(12px) saturate(1.4)',
+                border: `1.5px solid ${borderColor}`,
+                borderColor: isHovered ? borderColor : `color-mix(in oklch, ${borderColor} 50%, transparent)`,
+                boxShadow: isHovered
+                  ? `0 4px 20px color-mix(in oklch, ${borderColor} 15%, transparent), inset 0 1px 0 rgba(255,255,255,0.5)`
+                  : 'inset 0 1px 0 rgba(255,255,255,0.3)',
+                color: borderColor,
+                transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
               }}
             >
-              {/* Shimmer overlay */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%)',
-                  backgroundSize: '200% 100%',
-                  animation: isHovered ? 'shimmer-slide 1.5s ease-in-out infinite' : 'none',
-                }}
-              />
-              <div className="relative flex items-center justify-center gap-2">
-                <span className="text-lg">{config.emoji}</span>
-                <Icon className="h-4 w-4 opacity-80" />
-                <span>{CONTRIBUTION_TYPE_LABELS[type]}</span>
+              <div className="transition-transform duration-300 group-hover:scale-110">
+                {CONTRIBUTION_SVG[type]}
               </div>
+              <span
+                className="text-sm font-medium transition-colors duration-200"
+                style={{ color: isHovered ? borderColor : 'var(--foreground)' }}
+              >
+                {CONTRIBUTION_TYPE_LABELS[type]}
+              </span>
             </button>
           );
         })}
@@ -129,8 +133,9 @@ export function ContributionButtons({ missionId }: ContributionButtonsProps) {
       <Dialog open={!!openType} onOpenChange={(open) => !open && setOpenType(null)}>
         <DialogContent className="glass-card">
           <DialogHeader>
-            <DialogTitle className="font-display text-lg">
-              {openType && `${CONTRIBUTION_CONFIG[openType].emoji} ${CONTRIBUTION_TYPE_LABELS[openType]}`}
+            <DialogTitle className="font-display text-lg flex items-center gap-3">
+              {openType && CONTRIBUTION_SVG[openType]}
+              {openType && CONTRIBUTION_TYPE_LABELS[openType]}
             </DialogTitle>
             <DialogDescription>
               Ajoutez un message optionnel pour accompagner votre contribution.

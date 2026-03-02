@@ -88,7 +88,7 @@ export default function HomePage() {
           <FadeIn>
             <h1 className="text-5xl font-bold tracking-tight sm:text-6xl leading-tight">
               <span className="font-display">La solidarité,</span>{' '}
-              <span className="font-elegant gradient-text-primary not-italic text-[1.1em]">en action</span>
+              <span className="font-elegant gradient-text-primary not-italic text-[1.25em]">en action</span>
             </h1>
           </FadeIn>
 

@@ -253,52 +253,87 @@ export default function MissionDetailPage({
 
       <Separator />
 
-      {/* Contributions list */}
+      {/* Contributions — chat bubbles style */}
       <FadeIn delay={0.35}>
         <div>
           <h2 className="text-lg font-semibold mb-4">
-            Contributions ({contributions?.length ?? 0})
+            <span className="font-display">Fil de </span>
+            <span className="font-elegant gradient-text-primary text-xl">solidarité</span>
+            {contributions && contributions.length > 0 && (
+              <span className="ml-2 text-sm font-normal text-muted-foreground">
+                ({contributions.length})
+              </span>
+            )}
           </h2>
           {contributions && contributions.length > 0 ? (
-            <StaggerContainer className="space-y-3">
-              {contributions.map((contribution) => (
-                <StaggerItem key={contribution.id}>
-                  <Card className="shadow-sm border-border/60">
-                    <CardHeader className="py-3 px-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Avatar className="h-6 w-6">
-                            <AvatarFallback className="text-xs bg-primary/10 text-primary font-semibold">
-                              {contribution.user?.displayName?.charAt(0).toUpperCase() ?? 'U'}
-                            </AvatarFallback>
-                          </Avatar>
-                          <span className="text-sm font-medium">
-                            {contribution.user?.displayName}
-                          </span>
-                          <Badge variant="secondary" className="text-xs">
-                            {CONTRIBUTION_TYPE_LABELS[contribution.type]}
-                          </Badge>
+            <StaggerContainer className="space-y-3 max-w-xl">
+              {contributions.map((contribution, idx) => {
+                const isEven = idx % 2 === 0;
+                const initial = contribution.user?.displayName?.charAt(0).toUpperCase() ?? 'U';
+                return (
+                  <StaggerItem key={contribution.id}>
+                    <div className={`flex gap-2.5 ${isEven ? '' : 'flex-row-reverse'}`}>
+                      {/* Avatar */}
+                      <Avatar className="h-8 w-8 flex-shrink-0 mt-1">
+                        <AvatarFallback
+                          className="text-xs font-semibold"
+                          style={{
+                            background: isEven ? 'oklch(0.55 0.18 280 / 0.12)' : 'oklch(0.55 0.14 170 / 0.12)',
+                            color: isEven ? 'oklch(0.55 0.18 280)' : 'oklch(0.55 0.14 170)',
+                          }}
+                        >
+                          {initial}
+                        </AvatarFallback>
+                      </Avatar>
+                      {/* Bubble */}
+                      <div className={`max-w-[80%] ${isEven ? '' : 'text-right'}`}>
+                        <div
+                          className={`inline-block px-4 py-2.5 text-sm leading-relaxed ${
+                            isEven
+                              ? 'rounded-2xl rounded-tl-md'
+                              : 'rounded-2xl rounded-tr-md'
+                          }`}
+                          style={{
+                            background: isEven
+                              ? 'oklch(0.55 0.18 280 / 0.08)'
+                              : 'oklch(0.96 0.01 280)',
+                            border: isEven
+                              ? '1px solid oklch(0.55 0.18 280 / 0.15)'
+                              : '1px solid oklch(0.92 0.015 280 / 0.6)',
+                          }}
+                        >
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="font-semibold text-xs text-foreground">
+                              {contribution.user?.displayName}
+                            </span>
+                            <Badge
+                              variant="secondary"
+                              className="text-[10px] px-1.5 py-0 h-4 font-medium"
+                            >
+                              {CONTRIBUTION_TYPE_LABELS[contribution.type]}
+                            </Badge>
+                          </div>
+                          {contribution.message && (
+                            <p className="text-foreground/80">
+                              {contribution.message}
+                            </p>
+                          )}
                         </div>
-                        <span className="text-xs text-muted-foreground">
+                        <p className={`text-[10px] text-muted-foreground mt-1 px-1 ${isEven ? '' : 'text-right'}`}>
                           {timeAgo(contribution.createdAt)}
-                        </span>
-                      </div>
-                    </CardHeader>
-                    {contribution.message && (
-                      <CardContent className="pt-0 px-4 pb-3">
-                        <p className="text-sm text-muted-foreground">
-                          {contribution.message}
                         </p>
-                      </CardContent>
-                    )}
-                  </Card>
-                </StaggerItem>
-              ))}
+                      </div>
+                    </div>
+                  </StaggerItem>
+                );
+              })}
             </StaggerContainer>
           ) : (
-            <p className="text-sm text-muted-foreground">
-              Aucune contribution pour le moment. Soyez le premier !
-            </p>
+            <div className="text-center py-8">
+              <p className="text-muted-foreground text-sm">
+                Pas encore de contributions. Soyez le premier à tendre la main ✨
+              </p>
+            </div>
           )}
         </div>
       </FadeIn>

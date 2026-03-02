@@ -118,57 +118,6 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          {/* Dotted lines connecting steps (desktop only) */}
-          <div className="hidden md:block absolute top-[320px] left-0 right-0 z-0 pointer-events-none">
-            <svg className="w-full h-12" viewBox="0 0 1000 48" preserveAspectRatio="none">
-              {/* Line 1→2 */}
-              <motion.path
-                d="M 220 24 C 320 24, 380 24, 450 24"
-                stroke="#9333ea"
-                strokeWidth="2"
-                fill="none"
-                strokeDasharray="6 8"
-                strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 0.3 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, delay: 0.5, ease: 'easeInOut' }}
-              />
-              {/* Line 2→3 */}
-              <motion.path
-                d="M 550 24 C 650 24, 710 24, 780 24"
-                stroke="#9333ea"
-                strokeWidth="2"
-                fill="none"
-                strokeDasharray="6 8"
-                strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 0.3 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, delay: 1, ease: 'easeInOut' }}
-              />
-              {/* Animated dots traveling along the lines */}
-              <motion.circle
-                cx="0" cy="24" r="3" fill="#9333ea"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: [0, 0.6, 0] }}
-                viewport={{ once: true }}
-                transition={{ duration: 2, delay: 1.5, repeat: Infinity, repeatDelay: 1 }}
-              >
-                <animateMotion dur="2s" repeatCount="indefinite" begin="1.5s" path="M 220 0 C 320 0, 380 0, 450 0" />
-              </motion.circle>
-              <motion.circle
-                cx="0" cy="24" r="3" fill="#9333ea"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: [0, 0.6, 0] }}
-                viewport={{ once: true }}
-                transition={{ duration: 2, delay: 2, repeat: Infinity, repeatDelay: 1 }}
-              >
-                <animateMotion dur="2s" repeatCount="indefinite" begin="2s" path="M 550 0 C 650 0, 710 0, 780 0" />
-              </motion.circle>
-            </svg>
-          </div>
-
           <div className="grid gap-12 md:grid-cols-3 relative z-10">
             {STEPS.map((step, i) => (
               <motion.div

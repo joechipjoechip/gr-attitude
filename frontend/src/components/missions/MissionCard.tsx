@@ -71,9 +71,14 @@ export function MissionCard({ mission }: MissionCardProps) {
           </div>
         </div>
 
-        {/* Category icon - top right floating */}
-        <div className="absolute top-3 right-3 z-10">
-          <CategoryIcon category={mission.category} size={20} style={{ color: categoryAccent }} />
+        {/* Category icon - top right, slightly overflowing card */}
+        <div className="absolute -top-4 -right-4 z-10">
+          <div 
+            className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg"
+            style={{ backgroundColor: `${categoryAccent}25` }}
+          >
+            <CategoryIcon category={mission.category} size={28} style={{ color: categoryAccent }} />
+          </div>
         </div>
 
         {/* Content */}

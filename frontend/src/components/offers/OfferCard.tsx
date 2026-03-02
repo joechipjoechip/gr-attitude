@@ -1,10 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ScaleOnHover } from '@/components/ui/motion';
-import { CategoryIcon } from '@/components/icons/CategoryIcon';
+import { CategoryIcon, CATEGORY_COLORS } from '@/components/icons/CategoryIcon';
 import {
   type IOffer,
   type OfferType,
@@ -14,19 +12,26 @@ import {
 } from '@/lib/types';
 
 const OFFER_TYPE_COLORS: Record<OfferType, string> = {
-  don: 'bg-blue-100 text-blue-800 hover:bg-blue-100',
-  competence: 'bg-purple-100 text-purple-800 hover:bg-purple-100',
-  materiel: 'bg-orange-100 text-orange-800 hover:bg-orange-100',
-  service: 'bg-green-100 text-green-800 hover:bg-green-100',
-  ecoute: 'bg-pink-100 text-pink-800 hover:bg-pink-100',
+  don: 'bg-blue-400 text-white',
+  competence: 'bg-purple-400 text-white',
+  materiel: 'bg-orange-400 text-white',
+  service: 'bg-green-400 text-white',
+  ecoute: 'bg-pink-400 text-white',
 };
 
-const OFFER_TYPE_BORDER: Record<OfferType, string> = {
-  don: '#3b82f6',
-  competence: '#a855f7',
-  materiel: '#f97316',
-  service: '#22c55e',
-  ecoute: '#ec4899',
+const CATEGORY_BG_COLORS: Record<string, string> = {
+  demenagement: 'bg-indigo-400',
+  bricolage: 'bg-orange-400',
+  numerique: 'bg-cyan-400',
+  administratif: 'bg-purple-400',
+  garde_enfants: 'bg-pink-400',
+  transport: 'bg-green-400',
+  ecoute: 'bg-yellow-400',
+  emploi: 'bg-blue-400',
+  alimentation: 'bg-red-400',
+  animaux: 'bg-teal-400',
+  education: 'bg-violet-400',
+  autre: 'bg-gray-400',
 };
 
 function timeAgo(dateStr: string): string {
@@ -48,41 +53,55 @@ interface OfferCardProps {
 }
 
 export function OfferCard({ offer }: OfferCardProps) {
-  const borderColor = OFFER_TYPE_BORDER[offer.offerType];
+  const categoryBgColor = offer.category 
+    ? CATEGORY_BG_COLORS[offer.category] ?? 'bg-gray-400'
+    : 'bg-gray-400';
+
   return (
-    <ScaleOnHover className="h-full">
-      <Link href={`/offers/${offer.id}`} className="block h-full">
-        <Card
-          className="h-full cursor-pointer overflow-hidden border-l-4"
-          style={{ borderLeftColor: borderColor }}
-        >
-          <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <Badge className={OFFER_TYPE_COLORS[offer.offerType]}>
-                {OFFER_TYPE_LABELS[offer.offerType]}
-              </Badge>
-              {offer.category && (
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <CategoryIcon category={offer.category as MissionCategory} size={12} />
-                  {CATEGORY_LABELS[offer.category as MissionCategory]}
-                </Badge>
-              )}
-            </div>
-            <CardTitle className="text-base line-clamp-2">
+    <Link href={`/offers/${offer.id}`} className="block h-full">
+      <div className="relative glass-card-stitch rounded-[3rem] p-8 pt-12 h-full cursor-pointer">
+        {/* Floating category icon - top right */}
+        {offer.category && (
+          <div className={`absolute -top-6 -right-4 w-24 h-24 ${categoryBgColor} rounded-[2.5rem] flex items-center justify-center shadow-xl`}>
+            <CategoryIcon category={offer.category as MissionCategory} size={40} className="text-white" />
+          </div>
+        )}
+
+        {/* Offer type badge - top left */}
+        <Badge className={`absolute -top-3 -left-3 ${OFFER_TYPE_COLORS[offer.offerType]} border-0 px-3 py-1 rounded-full shadow-lg font-semibold`}>
+          {OFFER_TYPE_LABELS[offer.offerType]}
+        </Badge>
+
+        {/* Content */}
+        <div className="space-y-4">
+          <div>
+            {offer.category && (
+              <p className="text-xs font-black uppercase tracking-widest mb-2" style={{ color: CATEGORY_COLORS[offer.category as MissionCategory] ?? '#6b7280' }}>
+                {CATEGORY_LABELS[offer.category as MissionCategory]}
+              </p>
+            )}
+            <h3 className="text-xl font-bold line-clamp-2 leading-tight">
               {offer.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {offer.description}
-            </p>
+            </h3>
+          </div>
+
+          <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+            {offer.description}
+          </p>
+
+          <div className="border-t border-white/60 pt-4 mt-auto">
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{offer.creator?.displayName}</span>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-semibold">
+                  {offer.creator?.displayName?.charAt(0).toUpperCase() ?? 'U'}
+                </div>
+                <span className="font-medium">{offer.creator?.displayName}</span>
+              </div>
               <span>{timeAgo(offer.createdAt)}</span>
             </div>
-          </CardContent>
-        </Card>
-      </Link>
-    </ScaleOnHover>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }

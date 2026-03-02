@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Nunito, Inter } from 'next/font/google';
+import { Nunito, Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from '@/providers/query-provider';
 import { AuthProvider } from '@/providers/auth-provider';
@@ -18,6 +18,13 @@ const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
   weight: ['400', '500', '600'],
+});
+
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${nunito.variable} ${inter.variable} antialiased`}
+        className={`${nunito.variable} ${inter.variable} ${playfair.variable} antialiased`}
       >
         <QueryProvider>
           <AuthProvider>

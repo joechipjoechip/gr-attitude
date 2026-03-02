@@ -50,56 +50,63 @@ export function FormWizard({
 
   const isFormValid = () => steps.every((step) => step.isValid());
 
+  const STEP_VIBES = ['✍️', '🏷️', '👁️', '✨'];
+
   return (
     <div className="container mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">{title}</h1>
+      <h1 className="text-2xl font-bold mb-2">
+        <span className="font-display">{title.split(' ').slice(0, -1).join(' ')} </span>
+        <span className="font-elegant gradient-text-primary">{title.split(' ').pop()}</span>
+      </h1>
+      <p className="text-muted-foreground mb-8">Étape par étape, en douceur.</p>
 
-      {/* Step indicator - clickable */}
-      <div className="flex items-center gap-2 mb-8">
-        {steps.map((step, i) => (
-          <div key={step.label} className="flex items-center gap-2">
+      {/* Step indicator - sleek pills */}
+      <div className="flex items-center gap-1.5 mb-8 p-1.5 rounded-2xl bg-muted/30 backdrop-blur-sm border border-border/30 w-fit">
+        {steps.map((step, i) => {
+          const isCurrent = i === currentStep;
+          const status = getStepStatus(i);
+          return (
             <button
+              key={step.label}
               onClick={() => onStepChange(i)}
-              className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                i === currentStep
-                  ? 'bg-primary text-primary-foreground shadow-lg'
-                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer ${
+                isCurrent
+                  ? 'gradient-primary text-white shadow-md'
+                  : status === 'valid'
+                    ? 'text-primary/80 hover:bg-primary/5'
+                    : 'text-muted-foreground hover:bg-muted/50'
               }`}
               aria-label={`Aller à l'étape ${i + 1}: ${step.label}`}
             >
-              {getStepIcon(i)}
+              <span className="text-base">{STEP_VIBES[i] ?? getStepIcon(i)}</span>
+              <span className="hidden sm:inline">{step.label}</span>
+              {status === 'valid' && !isCurrent && (
+                <CheckCircle2 className="h-3.5 w-3.5 text-primary/60" />
+              )}
             </button>
-            <span
-              className={`hidden text-sm sm:inline cursor-pointer ${
-                i === currentStep ? 'text-foreground font-medium' : 'text-muted-foreground'
-              }`}
-              onClick={() => onStepChange(i)}
-            >
-              {step.label}
-            </span>
-            {i < steps.length - 1 && (
-              <div className="h-px w-4 bg-border sm:w-8" />
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <Card>
+      <Card className="glass-card border-border/30">
         <CardHeader>
-          <CardTitle>{steps[currentStep].label}</CardTitle>
+          <CardTitle className="font-display text-lg flex items-center gap-2">
+            <span>{STEP_VIBES[currentStep]}</span>
+            {steps[currentStep].label}
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {steps[currentStep].content}
         </CardContent>
       </Card>
 
-      {/* Single validation button - always visible */}
+      {/* Gradient submit button */}
       <div className="flex justify-center mt-6">
         <Button
           onClick={onSubmit}
           disabled={!isFormValid() || isSubmitting}
           size="lg"
-          className="min-w-[200px]"
+          className="min-w-[200px] shimmer gradient-primary text-white border-0 shadow-lg hover:shadow-xl transition-shadow"
         >
           {isSubmitting ? 'Création...' : submitLabel}
         </Button>

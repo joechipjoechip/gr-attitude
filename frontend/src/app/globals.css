@@ -116,6 +116,10 @@
 .font-display {
   font-family: var(--font-nunito), sans-serif;
 }
+.font-elegant {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+}
 
 .dark {
   --background: oklch(0.14 0.02 280);

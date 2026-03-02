@@ -157,6 +157,11 @@ export default function MissionDetailPage({
               <h1 className="text-2xl font-bold leading-tight mb-3 font-display">
                 {mission.title}
               </h1>
+              <p className="text-sm font-elegant text-muted-foreground/70 -mt-1 mb-2">
+                {mission.contributionsCount > 0
+                  ? `${mission.contributionsCount} personne${mission.contributionsCount > 1 ? 's' : ''} solidaire${mission.contributionsCount > 1 ? 's' : ''}`
+                  : 'En attente de solidarité…'}
+              </p>
               {/* Creator */}
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Avatar
@@ -211,27 +216,6 @@ export default function MissionDetailPage({
               Expire dans {daysLeft} jour{daysLeft !== 1 ? 's' : ''}
             </div>
           )}
-        </div>
-      </FadeIn>
-
-      {/* Animated gradient progress bar */}
-      <FadeIn delay={0.2}>
-        <div className="space-y-2 px-1">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium">Progression</p>
-            <span className="text-sm font-bold" style={{ color: categoryColor }}>
-              {mission.progressPercent}%
-            </span>
-          </div>
-          <div className="h-2.5 w-full rounded-full bg-muted overflow-hidden">
-            <div
-              className="h-full rounded-full transition-all duration-700 ease-out"
-              style={{
-                width: `${mission.progressPercent}%`,
-                background: `linear-gradient(90deg, ${categoryColor}88, ${categoryColor})`,
-              }}
-            />
-          </div>
         </div>
       </FadeIn>
 

@@ -12,7 +12,7 @@ const STEPS = [
     number: '01',
     title: 'Publiez votre besoin',
     description: "Décrivez votre situation en quelques mots. Catégorie, urgence, localisation — c'est prêt en 2 minutes.",
-    color: '#ea580c',
+    color: '#7c5cbf',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
@@ -63,7 +63,7 @@ export default function HomePage() {
             position: 'absolute',
             width: '600px',
             height: '600px',
-            background: 'radial-gradient(circle, oklch(0.65 0.2 25 / 0.12), transparent 70%)',
+            background: 'radial-gradient(circle, oklch(0.55 0.18 280 / 0.08), transparent 70%)',
             borderRadius: '50%',
             top: '-200px',
             right: '-150px',
@@ -86,9 +86,9 @@ export default function HomePage() {
 
         <div className="relative container mx-auto max-w-3xl">
           <FadeIn>
-            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl font-display leading-tight">
-              La solidarité,{' '}
-              <span className="gradient-text-primary">en action</span>
+            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl leading-tight">
+              <span className="font-display">La solidarité,</span>{' '}
+              <span className="font-elegant gradient-text-primary not-italic text-[1.1em]">en action</span>
             </h1>
           </FadeIn>
 
@@ -133,7 +133,10 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-14"
           >
-            <h2 className="text-3xl font-bold font-display">Comment ça marche ?</h2>
+            <h2 className="text-3xl font-bold">
+              <span className="font-display">Comment ça </span>
+              <span className="font-elegant gradient-text-primary">marche ?</span>
+            </h2>
             <p className="mt-3 text-muted-foreground text-lg">
               Trois étapes simples pour transformer un besoin en action collective.
             </p>
@@ -217,7 +220,10 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
           className="relative container mx-auto max-w-2xl text-center space-y-6"
         >
-          <h2 className="text-3xl font-bold font-display">Rejoignez la communauté</h2>
+          <h2 className="text-3xl font-bold">
+            <span className="font-display">Rejoignez la </span>
+            <span className="font-elegant gradient-text-primary">communauté</span>
+          </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Des milliers de personnes s'entraident déjà. Publiez votre premier besoin ou proposez votre aide dès aujourd'hui.
           </p>

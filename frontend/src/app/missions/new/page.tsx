@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { useCreateMission } from '@/hooks/useCreateMission';
+import { useAuth } from '@/hooks/useAuth';
+import { AuthRequiredModal } from '@/components/auth/AuthRequiredModal';
 import {
   MissionCategory,
   HelpType,
@@ -62,6 +64,8 @@ const URGENCY_ICONS: Partial<Record<Urgency, string>> = {
 
 export default function NewMissionPage() {
   const router = useRouter();
+  const { user, isLoading: authLoading } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const createMission = useCreateMission();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<ICreateMission>({
@@ -114,6 +118,10 @@ export default function NewMissionPage() {
   };
 
   const handleSubmit = () => {
+    if (!user && !authLoading) {
+      setShowAuthModal(true);
+      return;
+    }
     if (!isTitleValid() || !isDescriptionValid()) {
       scrollToFirstError();
       return;
@@ -274,6 +282,8 @@ export default function NewMissionPage() {
   ];
 
   return (
+    <>
+    <AuthRequiredModal open={showAuthModal} onOpenChange={setShowAuthModal} />
     <FormWizard
       title="Créer une Mission"
       steps={steps}
@@ -283,5 +293,6 @@ export default function NewMissionPage() {
       isSubmitting={createMission.isPending}
       submitLabel="Valider ma mission"
     />
+    </>
   );
 }

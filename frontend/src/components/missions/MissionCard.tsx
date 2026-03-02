@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MissionProgress } from './MissionProgress';
 import { ScaleOnHover } from '@/components/ui/motion';
 import { CategoryIcon, CATEGORY_COLORS } from '@/components/icons/CategoryIcon';
 import {
@@ -67,7 +66,6 @@ export function MissionCard({ mission }: MissionCardProps) {
             <p className="text-sm text-muted-foreground line-clamp-2">
               {mission.description}
             </p>
-            <MissionProgress percent={mission.progressPercent} />
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{mission.creator?.displayName}</span>
               <span>{timeAgo(mission.createdAt)}</span>

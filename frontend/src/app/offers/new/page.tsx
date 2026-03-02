@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { useCreateOffer } from '@/hooks/useCreateOffer';
+import { useAuth } from '@/hooks/useAuth';
+import { AuthRequiredModal } from '@/components/auth/AuthRequiredModal';
 import {
   MissionCategory,
   OfferType,
@@ -49,6 +51,8 @@ const CATEGORY_ICONS: Partial<Record<MissionCategory, string>> = {
 
 export default function NewOfferPage() {
   const router = useRouter();
+  const { user, isLoading: authLoading } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const createOffer = useCreateOffer();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<ICreateOffer>({
@@ -101,6 +105,10 @@ export default function NewOfferPage() {
   };
 
   const handleSubmit = () => {
+    if (!user && !authLoading) {
+      setShowAuthModal(true);
+      return;
+    }
     if (!isTitleValid() || !isDescriptionValid()) {
       scrollToFirstError();
       return;
@@ -261,6 +269,8 @@ export default function NewOfferPage() {
   ];
 
   return (
+    <>
+    <AuthRequiredModal open={showAuthModal} onOpenChange={setShowAuthModal} />
     <FormWizard
       title="Proposer une Offre"
       steps={steps}
@@ -270,5 +280,6 @@ export default function NewOfferPage() {
       isSubmitting={createOffer.isPending}
       submitLabel="Valider mon offre"
     />
+    </>
   );
 }

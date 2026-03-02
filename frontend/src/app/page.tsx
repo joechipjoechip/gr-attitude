@@ -90,8 +90,18 @@ export default function HomePage() {
       </section>
 
       {/* Comment ça marche */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <section className="relative py-20 px-4 overflow-hidden">
+        {/* Blobs flottants */}
+        <div
+          className="absolute w-[500px] h-[500px] bg-purple-300/20 rounded-full blur-[120px] -top-32 -left-24 animate-pulse pointer-events-none"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute w-[400px] h-[400px] bg-indigo-300/15 rounded-full blur-[100px] -bottom-32 -right-24 pointer-events-none"
+          aria-hidden="true"
+        />
+
+        <div className="container mx-auto max-w-6xl relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,30 +118,81 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid gap-12 md:grid-cols-3">
+          {/* Timeline SVG (desktop only) */}
+          <div className="hidden md:block absolute top-[280px] left-0 right-0 z-0 pointer-events-none">
+            <svg className="w-full h-8" viewBox="0 0 1000 40" preserveAspectRatio="none">
+              <motion.path
+                d="M 100 20 Q 500 20 900 20"
+                stroke="url(#gradient)"
+                strokeWidth="3"
+                fill="none"
+                strokeDasharray="10 5"
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 0.4 }}
+                viewport={{ once: true }}
+                transition={{ duration: 2, ease: 'easeInOut' }}
+              />
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7c5cbf" />
+                  <stop offset="50%" stopColor="#7c3aed" />
+                  <stop offset="100%" stopColor="#10b981" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div className="grid gap-12 md:grid-cols-3 relative z-10">
             {STEPS.map((step, i) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.5 }}
-                className="glass-card-stitch rounded-[2.5rem] p-8 text-center space-y-4 hover:shadow-2xl"
+                transition={{ delay: i * 0.2, duration: 0.6, type: 'spring', stiffness: 100 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  rotateY: 5,
+                  transition: { duration: 0.3 }
+                }}
+                className="glass-hero rounded-[2.5rem] p-8 text-center space-y-4 shadow-2xl hover:shadow-[0_20px_60px_-10px_rgba(147,51,234,0.3)] transition-shadow"
+                style={{ 
+                  transformStyle: 'preserve-3d',
+                  perspective: '1000px'
+                }}
               >
-                <div className="relative inline-block">
-                  <div
-                    className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold font-display text-xl shadow-lg"
+                <motion.div 
+                  className="relative inline-block"
+                  initial={{ rotate: -180, scale: 0 }}
+                  whileInView={{ rotate: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.2 + 0.3, duration: 0.8, type: 'spring', stiffness: 200 }}
+                >
+                  <motion.div
+                    className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold font-display text-2xl shadow-2xl"
                     style={{
                       background: `linear-gradient(135deg, ${step.color}, ${step.color}bb)`,
                     }}
+                    whileHover={{ 
+                      rotate: 360,
+                      scale: 1.1,
+                      boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)'
+                    }}
+                    transition={{ duration: 0.6 }}
                   >
                     {step.number}
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 text-3xl">
+                  </motion.div>
+                  <motion.div 
+                    className="absolute -bottom-2 -right-2 text-4xl"
+                    initial={{ scale: 0, rotate: -90 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2 + 0.5, duration: 0.5, type: 'spring' }}
+                  >
                     {step.icon}
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold mt-4">{step.title}</h3>
+                  </motion.div>
+                </motion.div>
+                <h3 className="text-xl font-bold mt-6">{step.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{step.description}</p>
               </motion.div>
             ))}

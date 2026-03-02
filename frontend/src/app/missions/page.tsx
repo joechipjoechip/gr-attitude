@@ -18,6 +18,7 @@ import {
   type IMissionFilters,
 } from '@/lib/types';
 import { t } from '@/i18n';
+import { FilterChip } from '@/components/ui/filter-chip';
 
 const ALL_VALUE = '__all__';
 
@@ -46,28 +47,6 @@ const URGENCY_ACTIVE: Record<Urgency, string> = {
   [Urgency.MOYEN]: 'bg-orange-500 text-white border-orange-500',
   [Urgency.URGENT]: 'bg-red-500 text-white border-red-500',
 };
-
-interface FilterChipProps {
-  label: string;
-  active: boolean;
-  inactiveClass: string;
-  activeClass: string;
-  onClick: () => void;
-}
-
-function FilterChip({ label, active, inactiveClass, activeClass, onClick }: FilterChipProps) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-        active ? activeClass : inactiveClass
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
 
 export default function MissionsPage() {
   const [filters, setFilters] = useState<IMissionFilters>({ page: 1, limit: 12 });

@@ -23,9 +23,7 @@ import { FormWizard, type WizardStep } from '@/components/forms/FormWizard';
 import { ValidatedInput } from '@/components/forms/ValidatedInput';
 import { BadgeSelector } from '@/components/forms/BadgeSelector';
 import { ToggleSwitch } from '@/components/forms/ToggleSwitch';
-
-const MIN_TITLE_LENGTH = 5;
-const MIN_DESCRIPTION_LENGTH = 10;
+import { MIN_TITLE_LENGTH, MIN_DESCRIPTION_LENGTH, CATEGORY_ICONS } from '@/lib/constants';
 
 const OFFER_TYPE_ICONS: Partial<Record<OfferType, string>> = {
   [OfferType.DON]: '🎁',
@@ -33,21 +31,6 @@ const OFFER_TYPE_ICONS: Partial<Record<OfferType, string>> = {
   [OfferType.MATERIEL]: '🧰',
   [OfferType.SERVICE]: '🤲',
   [OfferType.ECOUTE]: '👂',
-};
-
-const CATEGORY_ICONS: Partial<Record<MissionCategory, string>> = {
-  [MissionCategory.DEMENAGEMENT]: '📦',
-  [MissionCategory.BRICOLAGE]: '🔧',
-  [MissionCategory.NUMERIQUE]: '💻',
-  [MissionCategory.ADMINISTRATIF]: '📋',
-  [MissionCategory.GARDE_ENFANTS]: '👶',
-  [MissionCategory.TRANSPORT]: '🚗',
-  [MissionCategory.ECOUTE]: '👂',
-  [MissionCategory.EMPLOI]: '💼',
-  [MissionCategory.ALIMENTATION]: '🍽️',
-  [MissionCategory.ANIMAUX]: '🐾',
-  [MissionCategory.EDUCATION]: '📚',
-  [MissionCategory.AUTRE]: '✨',
 };
 
 export default function NewOfferPage() {

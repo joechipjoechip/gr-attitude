@@ -29,7 +29,8 @@ manolo/
         ├── app/            Pages (missions, offers, profile, notifications, auth)
         ├── components/     Layout (Header, Footer, MobileNav, NotificationBell) + Metier
         ├── hooks/          React Query hooks (1 hook = 1 API call)
-        ├── lib/            api.ts (client), types.ts, auth.ts (token mgmt)
+        ├── i18n/           fr.json (all UI strings) + index.ts (t() function)
+        ├── lib/            api.ts (client), types.ts, constants.ts, auth.ts (token mgmt)
         └── providers/      AuthProvider (JWT context), QueryProvider (React Query)
 ```
 
@@ -81,6 +82,6 @@ Browser → Next.js (CSR) → fetch(API_URL) → NestJS → TypeORM → SQLite
 - PostGIS queries only when `DB_TYPE=postgres` (SQLite fallback skips geo)
 - Global ValidationPipe: `whitelist: true, transform: true`
 - Global HttpExceptionFilter: consistent `{ statusCode, message, timestamp }`
-- UI in French, no i18n
+- UI in French, i18n via `frontend/src/i18n/fr.json` + `t()` function (custom, no external lib)
 - Private stats only (no public leaderboards)
 - Missions expire at J+30 with J+25 reminder (cron daily midnight)

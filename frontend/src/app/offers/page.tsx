@@ -16,6 +16,7 @@ import {
   OFFER_TYPE_LABELS,
 } from '@/lib/types';
 import { t } from '@/i18n';
+import { FilterChip } from '@/components/ui/filter-chip';
 
 const ALL_VALUE = '__all__';
 
@@ -34,28 +35,6 @@ const OFFER_TYPE_ACTIVE: Record<OfferType, string> = {
   [OfferType.SERVICE]: 'bg-emerald-500 text-white border-emerald-500',
   [OfferType.ECOUTE]: 'bg-pink-500 text-white border-pink-500',
 };
-
-interface FilterChipProps {
-  label: string;
-  active: boolean;
-  inactiveClass: string;
-  activeClass: string;
-  onClick: () => void;
-}
-
-function FilterChip({ label, active, inactiveClass, activeClass, onClick }: FilterChipProps) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`px-3 py-1 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-        active ? activeClass : inactiveClass
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
 
 export default function OffersPage() {
   const [filters, setFilters] = useState<IOfferFilters>({ page: 1, limit: 12 });

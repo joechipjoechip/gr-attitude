@@ -10,8 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Core Concepts
 
-- **Mission**: A structured help request with fields for title, description, category, help_type (financière/conseil/matériel/relation), urgency, location, and status (ouverte → en_cours → résolue/expirée)
-- **Offre**: A help offer that auto-correlates with matching Missions
+- **Mission** (UI: "Besoin"): A structured help request with fields for title, description, category, help_type (financière/conseil/matériel/relation), urgency, location, and status (ouverte → en_cours → résolue/expirée)
+- **Offre** (UI: "Proposition"): A help offer that auto-correlates with matching Missions
 - **Contribution**: User engagement on a Mission (types: participe/propose/finance/conseille)
 - **Matching**: Algorithm correlating Missions ↔ Offres based on tags, geography, help type, and recency
 
@@ -70,7 +70,8 @@ gr-attitude/
 │   │   │   ├── notifications/
 │   │   │   └── profile/
 │   │   ├── hooks/        # 15+ React Query hooks
-│   │   └── lib/          # Utils (api, auth, types)
+│   │   ├── i18n/         # Translations (fr.json) + t() function
+│   │   └── lib/          # Utils (api, auth, types, constants)
 │   └── node_modules/
 │
 ├── shared/               # Shared TypeScript types
@@ -206,6 +207,28 @@ Main resource groups:
 5. ✅ Exploration feed with filters
 6. ✅ Offer creation
 7. ✅ User profile + history
+
+## i18n (Internationalization)
+
+All user-facing strings are centralized in `frontend/src/i18n/fr.json` and accessed via the `t()` function from `frontend/src/i18n/index.ts`.
+
+**Wording convention**: In code/architecture, we use `mission` and `offer`. In the UI (fr.json), these are displayed as **"Besoin"** and **"Proposition"** respectively.
+
+To change any UI text, edit `fr.json` only — no need to touch component files.
+
+```typescript
+import { t } from '@/i18n';
+t('besoins.title')                        // "Besoins"
+t('besoins.count_other', { count: 5 })    // "5 besoins"
+```
+
+## Shared Constants
+
+`frontend/src/lib/constants.ts` contains shared values used across multiple components:
+- `MIN_TITLE_LENGTH`, `MIN_DESCRIPTION_LENGTH` — form validation
+- `CATEGORY_ICONS` — emoji map for mission categories
+
+`frontend/src/components/ui/filter-chip.tsx` — reusable filter chip component (used in missions + offers list pages)
 
 ## Code Style
 

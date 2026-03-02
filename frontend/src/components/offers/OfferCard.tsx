@@ -1,32 +1,37 @@
 'use client';
 
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ScaleOnHover } from '@/components/ui/motion';
-import { CategoryIcon } from '@/components/icons/CategoryIcon';
+import { CategoryIcon, CATEGORY_COLORS } from '@/components/icons/CategoryIcon';
 import {
   type IOffer,
   type OfferType,
+  type MissionCategory,
   OFFER_TYPE_LABELS,
   CATEGORY_LABELS,
-  MissionCategory,
 } from '@/lib/types';
+import { MapPin, Clock } from 'lucide-react';
 
 const OFFER_TYPE_COLORS: Record<OfferType, string> = {
-  don: 'bg-blue-100 text-blue-800 hover:bg-blue-100',
-  competence: 'bg-purple-100 text-purple-800 hover:bg-purple-100',
-  materiel: 'bg-orange-100 text-orange-800 hover:bg-orange-100',
-  service: 'bg-green-100 text-green-800 hover:bg-green-100',
-  ecoute: 'bg-pink-100 text-pink-800 hover:bg-pink-100',
+  don: 'bg-gradient-to-r from-blue-400 to-cyan-400 text-white',
+  competence: 'bg-gradient-to-r from-purple-400 to-violet-400 text-white',
+  materiel: 'bg-gradient-to-r from-orange-400 to-amber-400 text-white',
+  service: 'bg-gradient-to-r from-emerald-400 to-teal-400 text-white',
+  ecoute: 'bg-gradient-to-r from-pink-400 to-rose-400 text-white',
 };
 
-const OFFER_TYPE_BORDER: Record<OfferType, string> = {
-  don: '#3b82f6',
-  competence: '#a855f7',
-  materiel: '#f97316',
-  service: '#22c55e',
-  ecoute: '#ec4899',
+const CATEGORY_ACCENT: Record<MissionCategory, string> = {
+  demenagement: '#8b5cf6',
+  bricolage: '#f97316',
+  numerique: '#3b82f6',
+  administratif: '#06b6d4',
+  garde_enfants: '#ec4899',
+  transport: '#a855f7',
+  ecoute: '#f43f5e',
+  emploi: '#10b981',
+  alimentation: '#f59e0b',
+  animaux: '#84cc16',
+  education: '#eab308',
+  autre: '#6b7280',
 };
 
 function timeAgo(dateStr: string): string {
@@ -34,7 +39,7 @@ function timeAgo(dateStr: string): string {
   const date = new Date(dateStr);
   const diffMs = now.getTime() - date.getTime();
   const diffMin = Math.floor(diffMs / 60000);
-  if (diffMin < 1) return "A l'instant";
+  if (diffMin < 1) return "À l'instant";
   if (diffMin < 60) return `Il y a ${diffMin} min`;
   const diffH = Math.floor(diffMin / 60);
   if (diffH < 24) return `Il y a ${diffH}h`;
@@ -48,41 +53,92 @@ interface OfferCardProps {
 }
 
 export function OfferCard({ offer }: OfferCardProps) {
-  const borderColor = OFFER_TYPE_BORDER[offer.offerType];
+  const categoryAccent = offer.category
+    ? (CATEGORY_ACCENT[offer.category as MissionCategory] ?? '#6b7280')
+    : '#6b7280';
+
   return (
-    <ScaleOnHover className="h-full">
-      <Link href={`/offers/${offer.id}`} className="block h-full">
-        <Card
-          className="h-full cursor-pointer overflow-hidden border-l-4"
-          style={{ borderLeftColor: borderColor }}
-        >
-          <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <Badge className={OFFER_TYPE_COLORS[offer.offerType]}>
-                {OFFER_TYPE_LABELS[offer.offerType]}
-              </Badge>
-              {offer.category && (
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <CategoryIcon category={offer.category as MissionCategory} size={12} />
-                  {CATEGORY_LABELS[offer.category as MissionCategory]}
-                </Badge>
-              )}
+    <Link href={`/offers/${offer.id}`} className="block group">
+      <div className="relative h-full glass-card-liquid rounded-[3rem] p-8 pt-16">
+        {/* Offer type badge - top left */}
+        <div className="absolute top-3 left-3 z-10">
+          <div className={`${OFFER_TYPE_COLORS[offer.offerType]} px-4 py-2 rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg`}>
+            {OFFER_TYPE_LABELS[offer.offerType]}
+          </div>
+        </div>
+
+        {/* Category icon - top right, slightly overflowing card */}
+        {offer.category && (
+          <div className="absolute -top-4 -right-4 z-10">
+            <div 
+              className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+              style={{ backgroundColor: `${categoryAccent}25` }}
+            >
+              <CategoryIcon category={offer.category as MissionCategory} size={28} style={{ color: categoryAccent }} />
             </div>
-            <CardTitle className="text-base line-clamp-2">
-              {offer.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {offer.description}
-            </p>
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{offer.creator?.displayName}</span>
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="relative z-0 space-y-4">
+          {/* Category label */}
+          {offer.category && (
+            <div>
+              <span 
+                className="inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-[0.15em]"
+                style={{ 
+                  backgroundColor: `${categoryAccent}20`,
+                  color: categoryAccent 
+                }}
+              >
+                {CATEGORY_LABELS[offer.category as MissionCategory]}
+              </span>
+            </div>
+          )}
+
+          {/* Title */}
+          <h3 className="text-xl font-black tracking-tight text-slate-900 line-clamp-2 leading-tight">
+            {offer.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-sm text-slate-600 line-clamp-2 font-medium">
+            {offer.description}
+          </p>
+
+          {/* Location & Time */}
+          <div className="flex items-center gap-4 text-xs text-slate-500 font-semibold">
+            <div className="flex items-center gap-1.5">
+              <MapPin size={14} />
+              <span>{offer.location || 'Non spécifié'}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Clock size={14} />
               <span>{timeAgo(offer.createdAt)}</span>
             </div>
-          </CardContent>
-        </Card>
-      </Link>
-    </ScaleOnHover>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-slate-300/60 to-transparent" />
+
+          {/* Footer: Author + CTA */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-xs">
+                {offer.creator?.displayName?.charAt(0).toUpperCase() || 'A'}
+              </div>
+              <span className="text-sm font-semibold text-slate-700">
+                {offer.creator?.displayName || 'Anonyme'}
+              </span>
+            </div>
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-xs font-black text-emerald-600 uppercase tracking-widest">
+                Voir détails →
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }

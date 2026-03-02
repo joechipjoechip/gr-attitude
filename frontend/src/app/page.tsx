@@ -14,37 +14,21 @@ const STEPS = [
     title: t('home.step1Title'),
     description: t('home.step1Desc'),
     color: '#7c5cbf',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z" />
-      </svg>
-    ),
+    icon: '✍️',
   },
   {
     number: '02',
     title: t('home.step2Title'),
     description: t('home.step2Desc'),
     color: '#7c3aed',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-      </svg>
-    ),
+    icon: '👥',
   },
   {
     number: '03',
     title: t('home.step3Title'),
     description: t('home.step3Desc'),
     color: '#10b981',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-        <polyline points="22 4 12 14.01 9 11.01" />
-      </svg>
-    ),
+    icon: '✅',
   },
 ];
 
@@ -54,42 +38,24 @@ export default function HomePage() {
   const { data } = useMissions({ limit: 6 });
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-stitch">
       {/* Hero */}
-      <section className="relative overflow-hidden py-24 px-4 text-center">
+      <section className="relative overflow-hidden pt-20 py-24 px-4 text-center">
         {/* Decorative blobs */}
         <div
+          className="absolute w-[600px] h-[600px] bg-[#9333ea]/20 rounded-full blur-[140px] -top-48 -right-32 pointer-events-none animate-pulse"
           aria-hidden="true"
-          style={{
-            position: 'absolute',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, oklch(0.55 0.18 280 / 0.08), transparent 70%)',
-            borderRadius: '50%',
-            top: '-200px',
-            right: '-150px',
-            pointerEvents: 'none',
-          }}
         />
         <div
+          className="absolute w-[450px] h-[450px] bg-indigo-500/15 rounded-full blur-[140px] -bottom-24 -left-32 pointer-events-none"
           aria-hidden="true"
-          style={{
-            position: 'absolute',
-            width: '450px',
-            height: '450px',
-            background: 'radial-gradient(circle, oklch(0.6 0.15 280 / 0.1), transparent 70%)',
-            borderRadius: '50%',
-            bottom: '-100px',
-            left: '-120px',
-            pointerEvents: 'none',
-          }}
         />
 
-        <div className="relative container mx-auto max-w-3xl">
+        <div className="relative container mx-auto max-w-4xl">
           <FadeIn>
-            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl leading-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
               <span className="font-display">{t('home.heroTitle1')}</span>{' '}
-              <span className="font-elegant gradient-text-primary not-italic text-[1.25em]">{t('home.heroTitle2')}</span>
+              <span className="font-elegant gradient-text-primary not-italic text-[1.25em] inline-block float-animation">{t('home.heroTitle2')}</span>
             </h1>
           </FadeIn>
 
@@ -106,17 +72,16 @@ export default function HomePage() {
             ))}
           </div>
 
-          <FadeIn delay={0.9} className="mt-8">
+          <FadeIn delay={0.9} className="mt-10">
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button
                 size="lg"
                 asChild
-                className="shimmer shadow-lg text-white border-none px-8 font-semibold"
-                style={{ background: 'linear-gradient(135deg, oklch(0.55 0.18 280), oklch(0.6 0.15 320))' }}
+                className="h-12 rounded-2xl shadow-[0_20px_40px_-10px_rgba(147,51,234,0.4)] bg-[#9333ea] text-white hover:opacity-90 border-0 px-8 font-bold text-base"
               >
                 <Link href="/missions/new">{t('home.ctaCreate')}</Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="px-8">
+              <Button size="lg" variant="outline" asChild className="h-12 rounded-2xl px-8 glass-sidebar-liquid border-white/60 hover:bg-white/80 font-bold">
                 <Link href="/offers/new">{t('home.ctaOffer')}</Link>
               </Button>
             </div>
@@ -125,8 +90,8 @@ export default function HomePage() {
       </section>
 
       {/* Comment ça marche */}
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-5xl">
+      <section className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -134,16 +99,16 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-14"
           >
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-4xl font-bold tracking-tight">
               <span className="font-display">{t('home.howItWorks')} </span>
               <span className="font-elegant gradient-text-primary">{t('home.howItWorks2')}</span>
             </h2>
-            <p className="mt-3 text-muted-foreground text-lg">
+            <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
               {t('home.howItWorksSubtitle')}
             </p>
           </motion.div>
 
-          <div className="grid gap-10 md:grid-cols-3">
+          <div className="grid gap-12 md:grid-cols-3">
             {STEPS.map((step, i) => (
               <motion.div
                 key={step.number}
@@ -151,26 +116,23 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.5 }}
-                className="flex flex-col items-center text-center gap-4"
+                className="glass-card-stitch rounded-[2.5rem] p-8 text-center space-y-4 hover:shadow-2xl"
               >
-                <div className="relative">
+                <div className="relative inline-block">
                   <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold font-display text-lg shadow-lg"
+                    className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold font-display text-xl shadow-lg"
                     style={{
                       background: `linear-gradient(135deg, ${step.color}, ${step.color}bb)`,
                     }}
                   >
                     {step.number}
                   </div>
-                  <div
-                    className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ color: step.color, background: `${step.color}18` }}
-                  >
+                  <div className="absolute -bottom-2 -right-2 text-3xl">
                     {step.icon}
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold mt-2">{step.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                <h3 className="text-xl font-bold mt-4">{step.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
           </div>
@@ -186,15 +148,15 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="flex items-center justify-between mb-8"
+              className="flex items-center justify-between mb-10"
             >
-              <h2 className="text-2xl font-bold font-display">{t('home.recentBesoins')}</h2>
-              <Button variant="ghost" asChild>
+              <h2 className="text-3xl font-bold font-display">{t('home.recentBesoins')}</h2>
+              <Button variant="ghost" asChild className="rounded-xl">
                 <Link href="/missions">{t('home.viewAll')}</Link>
               </Button>
             </motion.div>
 
-            <StaggerContainer className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {data.data.map((mission) => (
                 <StaggerItem key={mission.id}>
                   <MissionCard mission={mission} />
@@ -206,38 +168,34 @@ export default function HomePage() {
       )}
 
       {/* Footer CTA */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative py-20 px-4 overflow-hidden mt-16">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-gradient-to-br from-purple-100/40 to-pink-100/30"
           aria-hidden="true"
-          style={{
-            background: 'linear-gradient(135deg, oklch(0.65 0.2 25 / 0.07), oklch(0.6 0.15 280 / 0.07))',
-          }}
         />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative container mx-auto max-w-2xl text-center space-y-6"
+          className="relative container mx-auto max-w-3xl text-center space-y-6"
         >
-          <h2 className="text-3xl font-bold">
-            <span className="font-display">{t('home.joinTitle1')}</span>
+          <h2 className="text-4xl font-bold tracking-tight">
+            <span className="font-display">{t('home.joinTitle1')} </span>
             <span className="font-elegant gradient-text-primary">{t('home.joinTitle2')}</span>
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
             {t('home.joinSubtitle')}
           </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center pt-4">
             <Button
               size="lg"
               asChild
-              className="shimmer shadow-lg text-white border-none px-8 font-semibold"
-              style={{ background: 'linear-gradient(135deg, oklch(0.55 0.18 280), oklch(0.6 0.15 320))' }}
+              className="h-12 rounded-2xl shadow-[0_20px_40px_-10px_rgba(147,51,234,0.4)] bg-[#9333ea] text-white hover:opacity-90 border-0 px-8 font-bold text-base"
             >
               <Link href="/missions/new">{t('home.ctaCreate')}</Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="px-8">
+            <Button size="lg" variant="outline" asChild className="h-12 rounded-2xl px-8 glass-sidebar-liquid border-white/60 hover:bg-white/80 font-bold">
               <Link href="/missions">{t('home.ctaExplore')}</Link>
             </Button>
           </div>

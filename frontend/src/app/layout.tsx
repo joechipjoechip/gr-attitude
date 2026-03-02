@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Nunito, Inter, Marck_Script } from 'next/font/google';
+import { Nunito, Inter, Marck_Script, Public_Sans } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from '@/providers/query-provider';
 import { AuthProvider } from '@/providers/auth-provider';
@@ -25,6 +25,12 @@ const marckScript = Marck_Script({
   variable: '--font-script',
   subsets: ['latin'],
   weight: '400',
+});
+
+const publicSans = Public_Sans({
+  variable: '--font-public-sans',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '900'],
 });
 
 export const metadata: Metadata = {
@@ -53,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${nunito.variable} ${inter.variable} ${marckScript.variable} antialiased`}
+        className={`${nunito.variable} ${inter.variable} ${marckScript.variable} ${publicSans.variable} antialiased`}
       >
         <QueryProvider>
           <AuthProvider>

@@ -117,10 +117,8 @@
   font-family: var(--font-nunito), sans-serif;
 }
 .font-elegant {
-  font-family: var(--font-cormorant), serif;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.02em;
+  font-family: var(--font-script), cursive;
+  font-weight: 400;
 }
 
 .dark {

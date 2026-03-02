@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Nunito, Inter, Cormorant_Garamond } from 'next/font/google';
+import { Nunito, Inter, Marck_Script } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from '@/providers/query-provider';
 import { AuthProvider } from '@/providers/auth-provider';
@@ -21,11 +21,10 @@ const inter = Inter({
   weight: ['400', '500', '600'],
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
+const marckScript = Marck_Script({
+  variable: '--font-script',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -54,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${nunito.variable} ${inter.variable} ${cormorant.variable} antialiased`}
+        className={`${nunito.variable} ${inter.variable} ${marckScript.variable} antialiased`}
       >
         <QueryProvider>
           <AuthProvider>

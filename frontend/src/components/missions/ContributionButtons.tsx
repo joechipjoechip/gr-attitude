@@ -13,6 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useCreateContribution } from '@/hooks/useCreateContribution';
+import { t } from '@/i18n';
 import {
   ContributionType,
   CONTRIBUTION_TYPE_LABELS,
@@ -77,7 +78,7 @@ export function ContributionButtons({ missionId }: ContributionButtonsProps) {
       { type: openType, missionId, message: message || undefined },
       {
         onSuccess: () => {
-          toast.success('Contribution ajoutée !');
+          toast.success(t('contributions.added'));
           setOpenType(null);
           setMessage('');
         },
@@ -160,7 +161,7 @@ export function ContributionButtons({ missionId }: ContributionButtonsProps) {
               disabled={mutation.isPending}
               className="gradient-primary text-white border-0"
             >
-              {mutation.isPending ? 'Envoi...' : 'Confirmer'}
+              {mutation.isPending ? t('common.sending') : t('common.confirm')}
             </Button>
           </DialogFooter>
         </DialogContent>

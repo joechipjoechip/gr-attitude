@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserStats } from '@/hooks/useUserStats';
 import { useMissions } from '@/hooks/useMissions';
+import { t } from '@/i18n';
 import { useOffers } from '@/hooks/useOffers';
 import {
   CATEGORY_LABELS,
@@ -72,10 +73,10 @@ function AnimatedNumber({ value }: { value: number }) {
 }
 
 const STAT_CARDS = [
-  { key: 'missionsCreated', label: 'Missions creees', icon: '🎯' },
-  { key: 'missionsResolved', label: 'Resolues', icon: '✅' },
-  { key: 'contributionsGiven', label: 'Contributions', icon: '🤝' },
-  { key: 'offersCreated', label: 'Offres', icon: '💡' },
+  { key: 'missionsCreated', label: t('profile.stats.besoinsCreated'), icon: '🎯' },
+  { key: 'missionsResolved', label: t('profile.stats.resolved'), icon: '✅' },
+  { key: 'contributionsGiven', label: t('profile.stats.contributions'), icon: '🤝' },
+  { key: 'offersCreated', label: t('profile.stats.propositions'), icon: '💡' },
 ] as const;
 
 export default function ProfilePage() {
@@ -114,8 +115,8 @@ export default function ProfilePage() {
             <h1 className="text-2xl font-bold font-display">{user.displayName}</h1>
             <p className="text-sm text-muted-foreground mt-0.5">{user.email}</p>
             <p className="text-xs text-muted-foreground mt-1">
-              {myMissions.length} mission{myMissions.length !== 1 ? 's' : ''} &middot;{' '}
-              {myOffers.length} offre{myOffers.length !== 1 ? 's' : ''}
+              {t(myMissions.length !== 1 ? 'profile.summary_besoin_other' : 'profile.summary_besoin_one', { count: myMissions.length })} &middot;{' '}
+              {t(myOffers.length !== 1 ? 'profile.summary_proposition_other' : 'profile.summary_proposition_one', { count: myOffers.length })}
             </p>
           </div>
         </div>
@@ -153,7 +154,7 @@ export default function ProfilePage() {
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="w-full sm:w-auto">
             <TabsTrigger value="missions" className="flex-1 sm:flex-none">
-              Mes Missions
+              {t('profile.tabs.besoins')}
               {myMissions.length > 0 && (
                 <span className="ml-2 text-xs bg-primary/15 text-primary px-1.5 py-0.5 rounded-full font-medium">
                   {myMissions.length}
@@ -161,7 +162,7 @@ export default function ProfilePage() {
               )}
             </TabsTrigger>
             <TabsTrigger value="offers" className="flex-1 sm:flex-none">
-              Mes Offres
+              {t('profile.tabs.propositions')}
               {myOffers.length > 0 && (
                 <span className="ml-2 text-xs bg-primary/15 text-primary px-1.5 py-0.5 rounded-full font-medium">
                   {myOffers.length}

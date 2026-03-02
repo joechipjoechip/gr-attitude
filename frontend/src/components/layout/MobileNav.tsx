@@ -14,12 +14,13 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
+import { t } from '@/i18n';
 
 const NAV_LINKS = [
-  { href: '/', label: 'Accueil' },
-  { href: '/missions', label: 'Missions' },
-  { href: '/offers', label: 'Offres' },
-  { href: '/faq', label: 'FAQ' },
+  { href: '/', label: t('nav.home') },
+  { href: '/missions', label: t('nav.besoins') },
+  { href: '/offers', label: t('nav.propositions') },
+  { href: '/faq', label: t('nav.faq') },
 ];
 
 export function MobileNav() {
@@ -34,12 +35,12 @@ export function MobileNav() {
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon">
           <Menu className="h-5 w-5" />
-          <span className="sr-only">Menu</span>
+          <span className="sr-only">{t('common.menu')}</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-72">
         <SheetHeader>
-          <SheetTitle className="font-display gradient-text-primary text-left">GR attitude</SheetTitle>
+          <SheetTitle className="font-display gradient-text-primary text-left">{t('common.appName')}</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col gap-1 mt-6">
           {NAV_LINKS.map(({ href, label }) => {
@@ -74,7 +75,7 @@ export function MobileNav() {
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
               >
-                Profil
+                {t('nav.profile')}
               </Link>
               <Button
                 variant="ghost"
@@ -84,7 +85,7 @@ export function MobileNav() {
                   close();
                 }}
               >
-                Déconnexion
+                {t('nav.logout')}
               </Button>
             </>
           ) : (
@@ -94,14 +95,14 @@ export function MobileNav() {
                 onClick={close}
                 className="text-sm font-medium py-2.5 px-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
               >
-                Connexion
+                {t('nav.login')}
               </Link>
               <Link
                 href="/register"
                 onClick={close}
                 className="text-sm font-medium py-2.5 px-3 rounded-lg gradient-primary text-white mt-1 transition-all"
               >
-                Inscription
+                {t('nav.register')}
               </Link>
             </>
           )}

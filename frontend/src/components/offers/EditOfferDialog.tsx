@@ -33,6 +33,7 @@ import {
   VISIBILITY_LABELS,
 } from '@/lib/types';
 import { toast } from 'sonner';
+import { t } from '@/i18n';
 
 interface EditOfferDialogProps {
   offer: IOffer;
@@ -56,7 +57,7 @@ export function EditOfferDialog({ offer }: EditOfferDialogProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['offer', offer.id] });
       queryClient.invalidateQueries({ queryKey: ['offers'] });
-      toast.success('Offre mise a jour !');
+      toast.success(t('propositions.updated'));
       setOpen(false);
     },
     onError: (error) => {
@@ -66,7 +67,7 @@ export function EditOfferDialog({ offer }: EditOfferDialogProps) {
 
   const handleSubmit = () => {
     if (!title.trim() || !description.trim()) {
-      toast.error('Le titre et la description sont requis');
+      toast.error(t('besoins.edit.titleRequired'));
       return;
     }
     updateOffer.mutate({
@@ -105,7 +106,7 @@ export function EditOfferDialog({ offer }: EditOfferDialogProps) {
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{"Modifier l'offre"}</DialogTitle>
+          <DialogTitle>{t('propositions.edit.title')}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
@@ -126,7 +127,7 @@ export function EditOfferDialog({ offer }: EditOfferDialogProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>{"Type d'offre"}</Label>
+            <Label>{t('propositions.typeLabel')}</Label>
             <Select value={offerType} onValueChange={(v) => setOfferType(v as OfferType)}>
               <SelectTrigger className="w-full">
                 <SelectValue />
@@ -202,10 +203,10 @@ export function EditOfferDialog({ offer }: EditOfferDialogProps) {
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Annuler
+            {t('common.cancel')}
           </Button>
           <Button onClick={handleSubmit} disabled={updateOffer.isPending}>
-            {updateOffer.isPending ? 'Enregistrement...' : 'Enregistrer'}
+            {updateOffer.isPending ? t('common.saving') : t('common.save')}
           </Button>
         </DialogFooter>
       </DialogContent>

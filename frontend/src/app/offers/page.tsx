@@ -15,6 +15,7 @@ import {
   CATEGORY_LABELS,
   OFFER_TYPE_LABELS,
 } from '@/lib/types';
+import { t } from '@/i18n';
 
 const ALL_VALUE = '__all__';
 
@@ -76,11 +77,11 @@ export default function OffersPage() {
   return (
     <div className="container mx-auto max-w-6xl px-4 py-4 sm:py-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold font-display gradient-text-primary">Offres</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold font-display gradient-text-primary">{t('propositions.title')}</h1>
         <Button asChild className="w-full sm:w-auto h-11 sm:h-10 gradient-primary text-white border-0 hover:opacity-90">
           <Link href="/offers/new">
             <Plus className="mr-2 h-4 w-4" />
-            Proposer une Offre
+            {t('propositions.create')}
           </Link>
         </Button>
       </div>
@@ -95,7 +96,7 @@ export default function OffersPage() {
         />
 
         <div className="space-y-2">
-          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Type d'offre</p>
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('propositions.typeLabel')}</p>
           <div className="flex flex-wrap gap-2">
             {Object.values(OfferType).map((ot) => (
               <FilterChip
@@ -131,7 +132,7 @@ export default function OffersPage() {
       {isLoading ? (
         <div className="text-center py-16 text-muted-foreground">
           <div className="text-4xl mb-3">⏳</div>
-          <p>Chargement des offres...</p>
+          <p>{t('propositions.loading')}</p>
         </div>
       ) : data?.data && data.data.length > 0 ? (
         <>
@@ -175,14 +176,14 @@ export default function OffersPage() {
       ) : (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🤝</div>
-          <h3 className="text-lg font-semibold mb-2">Aucune offre trouvée</h3>
+          <h3 className="text-lg font-semibold mb-2">{t('propositions.none')}</h3>
           <p className="text-muted-foreground mb-6">
             Soyez le premier à proposer votre aide à la communauté.
           </p>
           <Button asChild className="gradient-primary text-white border-0 hover:opacity-90">
             <Link href="/offers/new">
               <Plus className="mr-2 h-4 w-4" />
-              Proposer la première offre
+              {t('propositions.create')}
             </Link>
           </Button>
         </div>

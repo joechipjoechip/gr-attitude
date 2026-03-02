@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@/i18n';
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { Clock, MapPin, Tag, Trash2 } from 'lucide-react';
@@ -77,7 +78,7 @@ export default function MissionDetailPage({
     mutationFn: () => missionsApi.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['missions'] });
-      toast.success('Mission supprimee !');
+      toast.success(t('besoins.deleted'));
       router.push('/missions');
     },
     onError: (error) => {
@@ -86,7 +87,7 @@ export default function MissionDetailPage({
   });
 
   const handleDelete = () => {
-    if (window.confirm('Supprimer cette mission ? Cette action est irreversible.')) {
+    if (window.confirm(t('besoins.confirmDelete'))) {
       deleteMission.mutate();
     }
   };
@@ -149,7 +150,7 @@ export default function MissionDetailPage({
                 </Badge>
                 {!isOpen && (
                   <Badge variant="secondary" className="text-xs font-medium">
-                    {mission.status === MissionStatus.RESOLUE ? 'Resolue' : 'Expiree'}
+                    {mission.status === MissionStatus.RESOLUE ? t('besoins.status.resolue') : t('besoins.status.expiree')}
                   </Badge>
                 )}
               </div>
@@ -245,7 +246,7 @@ export default function MissionDetailPage({
               className="border-destructive/30 text-destructive hover:bg-destructive hover:text-white"
             >
               <Trash2 className="h-4 w-4 mr-2" />
-              {deleteMission.isPending ? 'Suppression...' : 'Supprimer'}
+              {deleteMission.isPending ? t('common.deleting') : t('common.delete')}
             </Button>
           </div>
         </FadeIn>

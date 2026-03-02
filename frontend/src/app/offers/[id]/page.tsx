@@ -1,4 +1,5 @@
 'use client';
+import { t } from '@/i18n';
 
 import { use } from 'react';
 import Link from 'next/link';
@@ -73,7 +74,7 @@ export default function OfferDetailPage({
   const handleClose = async () => {
     try {
       await offersApi.close(id);
-      toast.success('Offre cloturee !');
+      toast.success(t('propositions.confirmClose'));
       router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Erreur');
@@ -84,7 +85,7 @@ export default function OfferDetailPage({
     mutationFn: () => offersApi.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['offers'] });
-      toast.success('Offre supprimee !');
+      toast.success(t('propositions.deleted'));
       router.push('/offers');
     },
     onError: (error) => {
@@ -93,7 +94,7 @@ export default function OfferDetailPage({
   });
 
   const handleDelete = () => {
-    if (window.confirm("Supprimer cette offre ? Cette action est irreversible.")) {
+    if (window.confirm(t('propositions.confirmDelete'))) {
       deleteOffer.mutate();
     }
   };
@@ -246,7 +247,7 @@ export default function OfferDetailPage({
           <div className="flex flex-wrap gap-2">
             {isOpen && (
               <Button variant="outline" onClick={handleClose}>
-                Cloturer cette offre
+                {t('besoins.close.title')}
               </Button>
             )}
             <EditOfferDialog offer={offer} />
@@ -258,7 +259,7 @@ export default function OfferDetailPage({
               className="border-destructive/30 text-destructive hover:bg-destructive hover:text-white"
             >
               <Trash2 className="h-4 w-4 mr-2" />
-              {deleteOffer.isPending ? 'Suppression...' : 'Supprimer'}
+              {deleteOffer.isPending ? t('common.deleting') : t('common.delete')}
             </Button>
           </div>
         </FadeIn>

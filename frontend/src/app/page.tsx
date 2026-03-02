@@ -6,12 +6,13 @@ import { Button } from '@/components/ui/button';
 import { MissionCard } from '@/components/missions/MissionCard';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/motion';
 import { useMissions } from '@/hooks/useMissions';
+import { t } from '@/i18n';
 
 const STEPS = [
   {
     number: '01',
-    title: 'Publiez votre besoin',
-    description: "Décrivez votre situation en quelques mots. Catégorie, urgence, localisation — c'est prêt en 2 minutes.",
+    title: t('home.step1Title'),
+    description: t('home.step1Desc'),
     color: '#7c5cbf',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -22,8 +23,8 @@ const STEPS = [
   },
   {
     number: '02',
-    title: 'La communauté répond',
-    description: 'Des personnes proches de vous reçoivent une notification et peuvent participer, conseiller ou financer.',
+    title: t('home.step2Title'),
+    description: t('home.step2Desc'),
     color: '#7c3aed',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -35,8 +36,8 @@ const STEPS = [
   },
   {
     number: '03',
-    title: 'Ensemble, on avance',
-    description: 'Suivez les contributions en temps réel. Clôturez la mission quand le besoin est satisfait.',
+    title: t('home.step3Title'),
+    description: t('home.step3Desc'),
     color: '#10b981',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -47,7 +48,7 @@ const STEPS = [
   },
 ];
 
-const subtitleWords = 'Trouvez des solutions, soyez la solution. Tout simplement.'.split(' ');
+const subtitleWords = t('home.subtitle').split(' ');
 
 export default function HomePage() {
   const { data } = useMissions({ limit: 6 });
@@ -87,8 +88,8 @@ export default function HomePage() {
         <div className="relative container mx-auto max-w-3xl">
           <FadeIn>
             <h1 className="text-5xl font-bold tracking-tight sm:text-6xl leading-tight">
-              <span className="font-display">La solidarité,</span>{' '}
-              <span className="font-elegant gradient-text-primary not-italic text-[1.25em]">en action</span>
+              <span className="font-display">{t('home.heroTitle1')}</span>{' '}
+              <span className="font-elegant gradient-text-primary not-italic text-[1.25em]">{t('home.heroTitle2')}</span>
             </h1>
           </FadeIn>
 
@@ -113,10 +114,10 @@ export default function HomePage() {
                 className="shimmer shadow-lg text-white border-none px-8 font-semibold"
                 style={{ background: 'linear-gradient(135deg, oklch(0.55 0.18 280), oklch(0.6 0.15 320))' }}
               >
-                <Link href="/missions/new">Créer une Mission</Link>
+                <Link href="/missions/new">{t('home.ctaCreate')}</Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="px-8">
-                <Link href="/offers/new">Proposer une Offre</Link>
+                <Link href="/offers/new">{t('home.ctaOffer')}</Link>
               </Button>
             </div>
           </FadeIn>
@@ -134,11 +135,11 @@ export default function HomePage() {
             className="text-center mb-14"
           >
             <h2 className="text-3xl font-bold">
-              <span className="font-display">Comment ça </span>
-              <span className="font-elegant gradient-text-primary">marche ?</span>
+              <span className="font-display">{t('home.howItWorks')} </span>
+              <span className="font-elegant gradient-text-primary">{t('home.howItWorks2')}</span>
             </h2>
             <p className="mt-3 text-muted-foreground text-lg">
-              Trois étapes simples pour transformer un besoin en action collective.
+              {t('home.howItWorksSubtitle')}
             </p>
           </motion.div>
 
@@ -176,7 +177,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Missions récentes */}
+      {/* Besoins récents */}
       {data?.data && data.data.length > 0 && (
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-6xl">
@@ -187,9 +188,9 @@ export default function HomePage() {
               transition={{ duration: 0.4 }}
               className="flex items-center justify-between mb-8"
             >
-              <h2 className="text-2xl font-bold font-display">Missions récentes</h2>
+              <h2 className="text-2xl font-bold font-display">{t('home.recentBesoins')}</h2>
               <Button variant="ghost" asChild>
-                <Link href="/missions">Voir tout →</Link>
+                <Link href="/missions">{t('home.viewAll')}</Link>
               </Button>
             </motion.div>
 
@@ -221,11 +222,11 @@ export default function HomePage() {
           className="relative container mx-auto max-w-2xl text-center space-y-6"
         >
           <h2 className="text-3xl font-bold">
-            <span className="font-display">Rejoignez la </span>
-            <span className="font-elegant gradient-text-primary">communauté</span>
+            <span className="font-display">{t('home.joinTitle1')}</span>
+            <span className="font-elegant gradient-text-primary">{t('home.joinTitle2')}</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Des milliers de personnes s'entraident déjà. Publiez votre premier besoin ou proposez votre aide dès aujourd'hui.
+            {t('home.joinSubtitle')}
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button
@@ -234,10 +235,10 @@ export default function HomePage() {
               className="shimmer shadow-lg text-white border-none px-8 font-semibold"
               style={{ background: 'linear-gradient(135deg, oklch(0.55 0.18 280), oklch(0.6 0.15 320))' }}
             >
-              <Link href="/missions/new">Créer une Mission</Link>
+              <Link href="/missions/new">{t('home.ctaCreate')}</Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="px-8">
-              <Link href="/missions">Explorer les missions</Link>
+              <Link href="/missions">{t('home.ctaExplore')}</Link>
             </Button>
           </div>
         </motion.div>

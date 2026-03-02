@@ -17,6 +17,7 @@ import {
   URGENCY_LABELS,
   type IMissionFilters,
 } from '@/lib/types';
+import { t } from '@/i18n';
 
 const ALL_VALUE = '__all__';
 
@@ -88,11 +89,11 @@ export default function MissionsPage() {
   return (
     <div className="container mx-auto max-w-6xl px-4 py-4 sm:py-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold font-display gradient-text-primary">Missions</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold font-display gradient-text-primary">{t('besoins.title')}</h1>
         <Button asChild className="w-full sm:w-auto h-11 sm:h-10 gradient-primary text-white border-0 hover:opacity-90">
           <Link href="/missions/new">
             <Plus className="mr-2 h-4 w-4" />
-            <span className="sm:inline">Créer une Mission</span>
+            <span className="sm:inline">{t('besoins.create')}</span>
           </Link>
         </Button>
       </div>
@@ -107,7 +108,7 @@ export default function MissionsPage() {
         />
 
         <div className="space-y-2">
-          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Type d'aide</p>
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('helpType.label')}</p>
           <div className="flex flex-wrap gap-2">
             {Object.values(HelpType).map((ht) => (
               <FilterChip
@@ -159,7 +160,7 @@ export default function MissionsPage() {
       {isLoading ? (
         <div className="text-center py-16 text-muted-foreground">
           <div className="text-4xl mb-3">⏳</div>
-          <p>Chargement des missions...</p>
+          <p>{t('besoins.loading')}</p>
         </div>
       ) : data?.data && data.data.length > 0 ? (
         <>
@@ -203,14 +204,14 @@ export default function MissionsPage() {
       ) : (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🌱</div>
-          <h3 className="text-lg font-semibold mb-2">Aucune mission trouvée</h3>
+          <h3 className="text-lg font-semibold mb-2">{t('besoins.none')}</h3>
           <p className="text-muted-foreground mb-6">
-            Soyez le premier à publier une mission et démarrer l'entraide.
+            {t('besoins.noneSubtitle')}
           </p>
           <Button asChild className="gradient-primary text-white border-0 hover:opacity-90">
             <Link href="/missions/new">
               <Plus className="mr-2 h-4 w-4" />
-              Créer la première mission
+              {t('besoins.create')}
             </Link>
           </Button>
         </div>

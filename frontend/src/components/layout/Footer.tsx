@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { t } from '@/i18n';
 
 export function Footer() {
   return (
@@ -6,30 +7,30 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
           <div>
-            <p className="font-bold font-display gradient-text-primary text-lg mb-2">GR attitude</p>
+            <p className="font-bold font-display gradient-text-primary text-lg mb-2">{t('common.appName')}</p>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Une plateforme d'entraide structurée qui transforme les besoins en actions concrètes.
+              {t('home.footerDesc')}
             </p>
           </div>
           <div>
-            <p className="text-sm font-semibold mb-2">Explorer</p>
+            <p className="text-sm font-semibold mb-2">{t('common.explore')}</p>
             <ul className="space-y-1">
-              <li><Link href="/missions" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Missions</Link></li>
-              <li><Link href="/offers" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Offres</Link></li>
-              <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</Link></li>
+              <li><Link href="/missions" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.besoins')}</Link></li>
+              <li><Link href="/offers" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.propositions')}</Link></li>
+              <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.faq')}</Link></li>
             </ul>
           </div>
           <div>
-            <p className="text-sm font-semibold mb-2">Compte</p>
+            <p className="text-sm font-semibold mb-2">{t('common.account')}</p>
             <ul className="space-y-1">
-              <li><Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Connexion</Link></li>
-              <li><Link href="/register" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Inscription</Link></li>
-              <li><Link href="/profile" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Profil</Link></li>
+              <li><Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.login')}</Link></li>
+              <li><Link href="/register" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.register')}</Link></li>
+              <li><Link href="/profile" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('nav.profile')}</Link></li>
             </ul>
           </div>
         </div>
         <div className="border-t pt-4 text-center text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} GR attitude — fait avec ❤️ pour l'entraide mutuelle.
+          &copy; {new Date().getFullYear()} {t('common.appName')} — {t('common.tagline')}
         </div>
       </div>
     </footer>

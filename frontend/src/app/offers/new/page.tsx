@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@/i18n';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
@@ -122,7 +123,7 @@ export default function NewOfferPage() {
       { ...form, tags },
       {
         onSuccess: (offer) => {
-          toast.success('Offre créée !');
+          toast.success(t('propositions.created'));
           router.push(`/offers/${offer.id}`);
         },
         onError: (error) => {
@@ -159,7 +160,7 @@ export default function NewOfferPage() {
             onChange={(v) => updateForm('description', v)}
             onBlur={() => markTouched('description')}
             minLength={MIN_DESCRIPTION_LENGTH}
-            placeholder="Décrivez votre offre en détail..."
+            placeholder={t('propositions.descPlaceholder')}
             required
             touched={touched.description}
             type="textarea"
@@ -183,7 +184,7 @@ export default function NewOfferPage() {
       content: (
         <>
           <BadgeSelector
-            label="Type d'offre"
+            label={t('propositions.typeLabel')}
             value={form.offerType}
             onChange={(v) => updateForm('offerType', v)}
             options={Object.values(OfferType)}
@@ -272,13 +273,13 @@ export default function NewOfferPage() {
     <>
     <AuthRequiredModal open={showAuthModal} onOpenChange={setShowAuthModal} />
     <FormWizard
-      title="Proposer une Offre"
+      title={t('propositions.createTitle')}
       steps={steps}
       currentStep={step}
       onStepChange={setStep}
       onSubmit={handleSubmit}
       isSubmitting={createOffer.isPending}
-      submitLabel="Valider mon offre"
+      submitLabel={t('propositions.submitLabel')}
     />
     </>
   );

@@ -14,12 +14,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { MobileNav } from './MobileNav';
 import { NotificationBell } from './NotificationBell';
+import { t } from '@/i18n';
 
 const NAV_LINKS = [
-  { href: '/', label: 'Accueil' },
-  { href: '/missions', label: 'Missions' },
-  { href: '/offers', label: 'Offres' },
-  { href: '/faq', label: 'FAQ' },
+  { href: '/', label: t('nav.home') },
+  { href: '/missions', label: t('nav.besoins') },
+  { href: '/offers', label: t('nav.propositions') },
+  { href: '/faq', label: t('nav.faq') },
 ];
 
 function NavLink({ href, label, pathname }: { href: string; label: string; pathname: string }) {
@@ -53,7 +54,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-xl font-bold font-display gradient-text-primary">
-            GR attitude
+            {t('common.appName')}
           </Link>
           <nav className="hidden items-center gap-5 md:flex">
             {NAV_LINKS.map(({ href, label }) => (
@@ -78,10 +79,10 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild>
-                    <Link href="/profile">Profil</Link>
+                    <Link href="/profile">{t('nav.profile')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={logout}>
-                    Déconnexion
+                    {t('nav.logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -89,10 +90,10 @@ export function Header() {
           ) : (
             <>
               <Button variant="outline" asChild className="h-9">
-                <Link href="/login">Connexion</Link>
+                <Link href="/login">{t('nav.login')}</Link>
               </Button>
               <Button asChild className="h-9 gradient-primary text-white border-0 hover:opacity-90">
-                <Link href="/register">Inscription</Link>
+                <Link href="/register">{t('nav.register')}</Link>
               </Button>
             </>
           )}

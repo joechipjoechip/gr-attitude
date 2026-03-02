@@ -1,4 +1,5 @@
 'use client';
+import { t } from '@/i18n';
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -135,7 +136,7 @@ export default function NewMissionPage() {
       { ...form, tags },
       {
         onSuccess: (mission) => {
-          toast.success('Mission créée !');
+          toast.success(t('besoins.created'));
           router.push(`/missions/${mission.id}`);
         },
         onError: (error) => {
@@ -285,13 +286,13 @@ export default function NewMissionPage() {
     <>
     <AuthRequiredModal open={showAuthModal} onOpenChange={setShowAuthModal} />
     <FormWizard
-      title="Créer une Mission"
+      title={t("besoins.createTitle")}
       steps={steps}
       currentStep={step}
       onStepChange={setStep}
       onSubmit={handleSubmit}
       isSubmitting={createMission.isPending}
-      submitLabel="Valider ma mission"
+      submitLabel={t("besoins.submitLabel")}
     />
     </>
   );

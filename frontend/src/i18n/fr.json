@@ -1,0 +1,178 @@
+{
+  "common": {
+    "appName": "GR attitude",
+    "tagline": "fait avec ❤️ pour l'entraide mutuelle",
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "close": "Fermer",
+    "continue": "Continuer",
+    "sending": "Envoi...",
+    "saving": "Enregistrement...",
+    "deleting": "Suppression...",
+    "error": "Erreur",
+    "explore": "Explorer",
+    "account": "Compte",
+    "menu": "Menu"
+  },
+  "nav": {
+    "home": "Accueil",
+    "besoins": "Besoins",
+    "propositions": "Propositions",
+    "faq": "FAQ",
+    "profile": "Profil",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "heroTitle1": "La solidarité,",
+    "heroTitle2": "en action",
+    "subtitle": "Trouvez des solutions, soyez la solution. Tout simplement.",
+    "ctaCreate": "Publier un Besoin",
+    "ctaOffer": "Faire une Proposition",
+    "ctaExplore": "Explorer les besoins",
+    "howItWorks": "Comment ça",
+    "howItWorks2": "marche ?",
+    "howItWorksSubtitle": "Trois étapes simples pour transformer un besoin en action collective.",
+    "step1Title": "Publiez votre besoin",
+    "step1Desc": "Décrivez votre situation en quelques mots. Catégorie, urgence, localisation — c'est prêt en 2 minutes.",
+    "step2Title": "La communauté répond",
+    "step2Desc": "Des personnes proches de vous reçoivent une notification et peuvent participer, conseiller ou financer.",
+    "step3Title": "Ensemble, on avance",
+    "step3Desc": "Suivez les contributions en temps réel. Clôturez le besoin quand il est satisfait.",
+    "recentBesoins": "Besoins récents",
+    "viewAll": "Voir tout →",
+    "joinTitle1": "Rejoignez la ",
+    "joinTitle2": "communauté",
+    "joinSubtitle": "Des milliers de personnes s'entraident déjà. Publiez votre premier besoin ou proposez votre aide dès aujourd'hui.",
+    "footerDesc": "Une plateforme d'entraide structurée qui transforme les besoins en actions concrètes."
+  },
+  "besoins": {
+    "title": "Besoins",
+    "create": "Publier un Besoin",
+    "createTitle": "Publier un Besoin",
+    "submitLabel": "Valider mon besoin",
+    "created": "Besoin créé !",
+    "deleted": "Besoin supprimé !",
+    "updated": "Besoin mis à jour !",
+    "confirmDelete": "Supprimer ce besoin ? Cette action est irréversible.",
+    "none": "Aucun besoin trouvé",
+    "noneSubtitle": "Soyez le premier à publier un besoin et démarrer l'entraide.",
+    "loading": "Chargement des besoins...",
+    "count_one": "{{count}} besoin",
+    "count_other": "{{count}} besoins",
+    "solidaire_one": "{{count}} personne solidaire",
+    "solidaire_other": "{{count}} personnes solidaires",
+    "close": {
+      "button": "Marquer comme résolu",
+      "title": "Clôturer ce besoin",
+      "description": "Marquer ce besoin comme résolu ? Cette action est irréversible.",
+      "howTitle": "Comment ça s'est passé ?",
+      "howDesc": "Partagez votre retour d'expérience sur ce besoin.",
+      "feedbackLabel": "Votre retour",
+      "feedbackPlaceholder": "Décrivez comment ça s'est déroulé...",
+      "thanksTitle": "Remerciement aux contributeurs",
+      "thanksDesc": "Envoyez un message de remerciement aux personnes qui vous ont aidé (optionnel).",
+      "thanksLabel": "Message de remerciement",
+      "thanksPlaceholder": "Merci à tous pour votre aide...",
+      "confirm": "Confirmer la clôture",
+      "doneTitle": "Besoin résolu !",
+      "doneDesc": "Votre besoin a été marqué comme résolu. Les contributeurs ont été notifiés."
+    },
+    "edit": {
+      "title": "Modifier le besoin",
+      "titleRequired": "Le titre et la description sont requis"
+    },
+    "status": {
+      "resolue": "Résolu",
+      "expiree": "Expiré"
+    }
+  },
+  "propositions": {
+    "title": "Propositions",
+    "create": "Faire une Proposition",
+    "createTitle": "Faire une Proposition",
+    "submitLabel": "Valider ma proposition",
+    "created": "Proposition créée !",
+    "deleted": "Proposition supprimée !",
+    "updated": "Proposition mise à jour !",
+    "confirmDelete": "Supprimer cette proposition ? Cette action est irréversible.",
+    "confirmClose": "Proposition clôturée !",
+    "none": "Aucune proposition trouvée",
+    "loading": "Chargement des propositions...",
+    "typeLabel": "Type de proposition",
+    "descPlaceholder": "Décrivez votre proposition en détail...",
+    "edit": {
+      "title": "Modifier la proposition"
+    }
+  },
+  "profile": {
+    "stats": {
+      "besoinsCreated": "Besoins créés",
+      "resolved": "Résolus",
+      "contributions": "Contributions",
+      "propositions": "Propositions"
+    },
+    "summary_besoin_one": "{{count}} besoin",
+    "summary_besoin_other": "{{count}} besoins",
+    "summary_proposition_one": "{{count}} proposition",
+    "summary_proposition_other": "{{count}} propositions",
+    "tabs": {
+      "besoins": "Besoins",
+      "propositions": "Propositions"
+    }
+  },
+  "faq": {
+    "title": "Foire Aux Questions",
+    "subtitle": "Tout ce que vous devez savoir sur GR attitude.",
+    "sections": {
+      "general": "Général",
+      "besoinsPropositions": "Besoins & Propositions",
+      "aiMatching": "IA & Matching",
+      "accountSecurity": "Compte & Sécurité"
+    },
+    "q1": "Qu'est-ce que GR attitude ?",
+    "a1": "GR attitude est une plateforme d'entraide structurée qui transforme les besoins en tickets d'action. Elle permet de publier des demandes d'aide (Besoins) et des propositions d'aide (Propositions), et de les mettre en relation intelligemment.",
+    "q2": "Comment ça marche ?",
+    "a2": "Créez un Besoin pour exprimer une demande d'aide (financière, conseil, matériel, mise en relation). D'autres membres peuvent contribuer en participant, proposant, finançant ou conseillant. Les Propositions sont automatiquement corrélées aux Besoins correspondants selon les tags, la géographie et le type d'aide.",
+    "q3": "C'est gratuit ?",
+    "a3": "Oui, GR attitude est entièrement gratuit. La plateforme est construite sur des principes d'entraide mutuelle, sans monétisation des relations humaines.",
+    "q4": "Comment créer un besoin ?",
+    "a4": "Connectez-vous, puis cliquez sur \"Nouveau besoin\" depuis la page Besoins. Renseignez le titre, la description, la catégorie, le type d'aide souhaité, l'urgence et optionnellement la localisation et des tags. Le besoin sera visible par la communauté dès sa publication.",
+    "q5": "Qu'est-ce qu'une proposition ?",
+    "a5": "Une proposition est une offre d'aide que vous publiez proactivement. Elle décrit ce que vous pouvez apporter (don, compétence, matériel, service, écoute) et est automatiquement corrélée aux besoins correspondants pour faciliter la mise en relation.",
+    "q6": "Comment clôturer un besoin ?",
+    "a6": "En tant que créateur du besoin, vous pouvez le clôturer depuis la page de détail en cliquant sur \"Clôturer le besoin\". Vous pouvez indiquer s'il a été résolu ou non, et laisser un message de remerciement aux contributeurs.",
+    "q7": "Comment fonctionne le matching ?",
+    "a7": "L'algorithme de corrélation analyse les tags, la géographie, le type d'aide et la récence pour associer automatiquement les Propositions aux Besoins pertinents. Un score de pertinence est calculé pour chaque correspondance et visible sur les pages de détail.",
+    "q8": "Quelles données l'IA utilise-t-elle ?",
+    "a8": "Le système de matching utilise uniquement les données que vous avez publiées : tags, localisation, catégorie et type d'aide. Aucune donnée personnelle privée n'est utilisée dans l'algorithme de corrélation.",
+    "q9": "Mes données sont-elles en sécurité ?",
+    "a9": "Oui. GR attitude respecte le RGPD. Vous pouvez supprimer votre compte à tout moment depuis votre profil. Seules les informations que vous choisissez de rendre publiques sont visibles par les autres membres.",
+    "q10": "Comment créer un compte ?",
+    "a10": "Cliquez sur \"Inscription\" en haut à droite. Vous pouvez vous inscrire avec une adresse email et un mot de passe, ou via votre compte Google ou Facebook pour une connexion rapide.",
+    "q11": "Comment supprimer mon compte ?",
+    "a11": "Rendez-vous sur votre page Profil et faites défiler jusqu'en bas. Un bouton \"Supprimer mon compte\" vous permettra d'effacer définitivement toutes vos données conformément au RGPD.",
+    "q12": "Mot de passe oublié ?",
+    "a12": "Sur la page de connexion, cliquez sur \"Mot de passe oublié\" et entrez votre adresse email. Vous recevrez un lien de réinitialisation. Si vous utilisez une connexion sociale (Google/Facebook), connectez-vous directement via ce fournisseur."
+  },
+  "contributions": {
+    "added": "Contribution ajoutée !"
+  },
+  "auth": {
+    "loginRequired": "Connexion requise",
+    "loginRequiredDesc": "Vous devez être connecté pour effectuer cette action."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "subtitle": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
+  },
+  "helpType": {
+    "label": "Type d'aide"
+  }
+}

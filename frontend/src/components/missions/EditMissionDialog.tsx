@@ -35,6 +35,7 @@ import {
   VISIBILITY_LABELS,
 } from '@/lib/types';
 import { toast } from 'sonner';
+import { t } from '@/i18n';
 
 interface EditMissionDialogProps {
   mission: IMission;
@@ -58,7 +59,7 @@ export function EditMissionDialog({ mission }: EditMissionDialogProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['mission', mission.id] });
       queryClient.invalidateQueries({ queryKey: ['missions'] });
-      toast.success('Mission mise a jour !');
+      toast.success(t('besoins.updated'));
       setOpen(false);
     },
     onError: (error) => {
@@ -68,7 +69,7 @@ export function EditMissionDialog({ mission }: EditMissionDialogProps) {
 
   const handleSubmit = () => {
     if (!title.trim() || !description.trim()) {
-      toast.error('Le titre et la description sont requis');
+      toast.error(t('besoins.edit.titleRequired'));
       return;
     }
     updateMission.mutate({
@@ -107,7 +108,7 @@ export function EditMissionDialog({ mission }: EditMissionDialogProps) {
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Modifier la mission</DialogTitle>
+          <DialogTitle>{t('besoins.edit.title')}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
@@ -200,10 +201,10 @@ export function EditMissionDialog({ mission }: EditMissionDialogProps) {
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Annuler
+            {t('common.cancel')}
           </Button>
           <Button onClick={handleSubmit} disabled={updateMission.isPending}>
-            {updateMission.isPending ? 'Enregistrement...' : 'Enregistrer'}
+            {updateMission.isPending ? t('common.saving') : t('common.save')}
           </Button>
         </DialogFooter>
       </DialogContent>

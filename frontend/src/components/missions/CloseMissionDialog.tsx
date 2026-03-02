@@ -16,6 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useCloseMission } from '@/hooks/useCloseMission';
 import { toast } from 'sonner';
+import { t } from '@/i18n';
 
 interface CloseMissionDialogProps {
   missionId: string;
@@ -55,25 +56,24 @@ export function CloseMissionDialog({ missionId }: CloseMissionDialogProps) {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="outline" className="w-full">
-          Marquer comme resolue
+          {t('besoins.close.button')}
         </Button>
       </DialogTrigger>
       <DialogContent>
         {step === 0 && (
           <>
             <DialogHeader>
-              <DialogTitle>Cloturer cette mission</DialogTitle>
+              <DialogTitle>{t('besoins.close.title')}</DialogTitle>
               <DialogDescription>
-                Marquer cette mission comme resolue ?
-                Cette action est irreversible.
+                {t('besoins.close.description')}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
               <Button variant="outline" onClick={() => handleOpenChange(false)}>
-                Annuler
+                {t('common.cancel')}
               </Button>
               <Button onClick={() => setStep(1)}>
-                Continuer
+                {t('common.continue')}
               </Button>
             </DialogFooter>
           </>
@@ -82,16 +82,16 @@ export function CloseMissionDialog({ missionId }: CloseMissionDialogProps) {
         {step === 1 && (
           <>
             <DialogHeader>
-              <DialogTitle>Comment ca s&apos;est passe ?</DialogTitle>
+              <DialogTitle>{t('besoins.close.howTitle')}</DialogTitle>
               <DialogDescription>
-                Partagez votre retour d&apos;experience sur cette mission.
+                {t('besoins.close.howDesc')}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-2">
-              <Label htmlFor="feedback">Votre retour</Label>
+              <Label htmlFor="feedback">{t('besoins.close.feedbackLabel')}</Label>
               <Textarea
                 id="feedback"
-                placeholder="Decrivez comment la mission s'est deroulee..."
+                placeholder={t('besoins.close.feedbackPlaceholder')}
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 rows={4}
@@ -99,10 +99,10 @@ export function CloseMissionDialog({ missionId }: CloseMissionDialogProps) {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setStep(0)}>
-                Retour
+                {t('common.back')}
               </Button>
               <Button onClick={() => setStep(2)}>
-                Continuer
+                {t('common.continue')}
               </Button>
             </DialogFooter>
           </>
@@ -111,16 +111,16 @@ export function CloseMissionDialog({ missionId }: CloseMissionDialogProps) {
         {step === 2 && (
           <>
             <DialogHeader>
-              <DialogTitle>Remerciement aux contributeurs</DialogTitle>
+              <DialogTitle>{t('besoins.close.thanksTitle')}</DialogTitle>
               <DialogDescription>
-                Envoyez un message de remerciement aux personnes qui vous ont aide (optionnel).
+                {t('besoins.close.thanksDesc')}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-2">
-              <Label htmlFor="thanks">Message de remerciement</Label>
+              <Label htmlFor="thanks">{t('besoins.close.thanksLabel')}</Label>
               <Textarea
                 id="thanks"
-                placeholder="Merci a tous pour votre aide..."
+                placeholder={t('besoins.close.thanksPlaceholder')}
                 value={thanks}
                 onChange={(e) => setThanks(e.target.value)}
                 rows={3}
@@ -128,13 +128,13 @@ export function CloseMissionDialog({ missionId }: CloseMissionDialogProps) {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setStep(1)}>
-                Retour
+                {t('common.back')}
               </Button>
               <Button
                 onClick={handleClose}
                 disabled={closeMission.isPending}
               >
-                {closeMission.isPending ? 'Envoi...' : 'Confirmer la cloture'}
+                {closeMission.isPending ? t('common.sending') : t('besoins.close.confirm')}
               </Button>
             </DialogFooter>
           </>
@@ -145,15 +145,15 @@ export function CloseMissionDialog({ missionId }: CloseMissionDialogProps) {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-emerald-600" />
-                Mission resolue !
+                {t('besoins.close.doneTitle')}
               </DialogTitle>
               <DialogDescription>
-                Votre mission a ete marquee comme resolue. Les contributeurs ont ete notifies.
+                {t('besoins.close.doneDesc')}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
               <Button onClick={() => handleOpenChange(false)}>
-                Fermer
+                {t('common.close')}
               </Button>
             </DialogFooter>
           </>

@@ -25,6 +25,7 @@ const OFFER_TYPE_COLORS: Record<OfferType, { bg: string; active: string }> = {
   [OfferType.MATERIEL]: { bg: 'bg-orange-50 text-orange-700 border-orange-200', active: 'bg-orange-500 text-white border-orange-500' },
   [OfferType.SERVICE]: { bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', active: 'bg-emerald-500 text-white border-emerald-500' },
   [OfferType.ECOUTE]: { bg: 'bg-pink-50 text-pink-700 border-pink-200', active: 'bg-pink-500 text-white border-pink-500' },
+  [OfferType.AUTRE]: { bg: 'bg-gray-50 text-gray-700 border-gray-200', active: 'bg-gray-500 text-white border-gray-500' },
 };
 
 export default function OffersPage() {

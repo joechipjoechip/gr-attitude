@@ -10,8 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Core Concepts
 
-- **Mission** (UI: "Besoin"): A structured help request with fields for title, description, category, help_type (financière/conseil/matériel/relation), urgency, location, and status (ouverte → en_cours → résolue/expirée)
-- **Offre** (UI: "Proposition"): A help offer that auto-correlates with matching Missions
+- **Mission** (UI: "Besoin"): A structured help request with fields for title, description, category, help_type (financière/conseil/matériel/relation/autre), urgency, location, and status (ouverte → en_cours → résolue/expirée)
+- **Offre** (UI: "Proposition"): A help offer with offer_type (don/compétence/matériel/service/écoute/autre) that auto-correlates with matching Missions
 - **Contribution**: User engagement on a Mission (types: participe/propose/finance/conseille)
 - **Matching**: Algorithm correlating Missions ↔ Offres based on tags, geography, help type, and recency
 

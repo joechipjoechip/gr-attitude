@@ -70,10 +70,11 @@ export default function MissionsPage() {
               </span>
               <h2 className="text-5xl md:text-8xl font-black text-slate-900 leading-[1.1] tracking-tighter">
                 Besoins{' '}
+                d&apos;
                 <span 
                   className="inline-block animate-float text-transparent bg-clip-text bg-gradient-to-r from-[#9333ea] via-indigo-500 to-purple-400 text-glow px-2 font-['Marck_Script'] text-[1.1em] rotate-[-2deg]"
                 >
-                  d'entraide
+                  entraide
                 </span>{' '}
                 🤝
               </h2>

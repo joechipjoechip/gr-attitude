@@ -76,6 +76,18 @@ Browser → Next.js (CSR) → fetch(API_URL) → NestJS → TypeORM → SQLite
 - Auth = JWT in localStorage, sent via Authorization header
 - Notifications = polling every 30s (no WebSocket)
 
+## Design System — Stitch "Liquid Glass"
+
+- **Background**: `bg-gradient-stitch` (warm gradient #fdfcfb → #e2d1c3)
+- **Cards**: `glass-card-liquid` (glassmorphism: backdrop-blur, white/opacity, border)
+- **Hero sections**: `glass-hero` (larger blur, gradient overlay)
+- **Header**: `glass-header-liquid` (sticky, transparent, blur)
+- **Typography**: Public Sans (body) + Marck Script (decorative headings)
+- **Primary color**: `#9333ea` (purple) with emerald/teal variants for offers
+- **Category icons**: Colored circles with semi-transparent background (`categoryAccent + 25` opacity)
+- **Animations**: `animate-float`, `text-glow`, Framer Motion for page transitions
+- **Layout**: Header is `sticky top-0`, pages use `pt-20` on first element for spacing
+
 ## Key Design Decisions
 
 - `synchronize: true` en dev (auto-schema, no migrations for MVP)

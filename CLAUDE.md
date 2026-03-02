@@ -230,6 +230,18 @@ t('besoins.count_other', { count: 5 })    // "5 besoins"
 
 `frontend/src/components/ui/filter-chip.tsx` — reusable filter chip component (used in missions + offers list pages)
 
+## Design System — Stitch "Liquid Glass"
+
+The frontend uses a custom glassmorphism design system inspired by Stitch prototypes:
+
+- **CSS classes** defined in `frontend/src/app/globals.css`: `glass-card-liquid`, `glass-hero`, `glass-header-liquid`, `glass-sidebar-liquid`, `bg-gradient-stitch`, `animate-float`, `text-glow`
+- **Fonts**: Public Sans (body), Marck Script (decorative italic headings)
+- **Primary**: `#9333ea` (purple), emerald/teal variants for offers
+- **Cards**: Glassmorphism with `backdrop-blur`, rounded corners (`rounded-[2rem]`+), semi-transparent backgrounds
+- **Category icons**: Colored circles with low-opacity background (`categoryAccent + '25'`)
+- **Layout**: Header is `sticky top-0 h-20`, each page's first element has `pt-20` for spacing
+- **Stitch reference**: `docs/stitch/besoins-reference.png`, `docs/stitch/besoins-screen.html`
+
 ## Code Style
 
 - **TypeScript**: Strict mode enabled

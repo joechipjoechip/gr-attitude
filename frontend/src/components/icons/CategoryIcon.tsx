@@ -117,19 +117,20 @@ const ICONS: Record<MissionCategory, ReactNode> = {
   ),
 };
 
-interface CategoryIconProps {
+export interface CategoryIconProps {
   category: MissionCategory;
   size?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function CategoryIcon({ category, size = 24, className }: CategoryIconProps) {
+export function CategoryIcon({ category, size = 24, className, style }: CategoryIconProps) {
   const color = CATEGORY_COLORS[category] ?? CATEGORY_COLORS[MissionCategory.AUTRE];
 
   return (
     <motion.div
       className={className}
-      style={{ color, display: 'inline-flex' }}
+      style={{ color, display: 'inline-flex', ...style }}
       initial="rest"
       whileHover="hover"
       variants={wobble}

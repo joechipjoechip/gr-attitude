@@ -17,26 +17,19 @@ const URGENCY_COLORS: Record<Urgency, string> = {
   urgent: 'bg-gradient-to-r from-red-500 to-pink-500 text-white',
 };
 
-const CATEGORY_BG_COLORS: Record<MissionCategory, string> = {
-  sante: 'bg-gradient-to-br from-indigo-400/90 to-indigo-500/90',
-  logement: 'bg-gradient-to-br from-green-400/90 to-green-500/90',
-  alimentation: 'bg-gradient-to-br from-orange-400/90 to-orange-500/90',
-  emploi: 'bg-gradient-to-br from-pink-400/90 to-pink-500/90',
-  education: 'bg-gradient-to-br from-yellow-400/90 to-yellow-500/90',
-  administratif: 'bg-gradient-to-br from-cyan-400/90 to-cyan-500/90',
-  mobilite: 'bg-gradient-to-br from-purple-400/90 to-purple-500/90',
-  lien_social: 'bg-gradient-to-br from-rose-400/90 to-rose-500/90',
-};
-
 const CATEGORY_ACCENT: Record<MissionCategory, string> = {
-  sante: '#6366f1',
-  logement: '#10b981',
-  alimentation: '#f97316',
-  emploi: '#ec4899',
-  education: '#eab308',
+  demenagement: '#8b5cf6',
+  bricolage: '#f97316',
+  numerique: '#3b82f6',
   administratif: '#06b6d4',
-  mobilite: '#a855f7',
-  lien_social: '#f43f5e',
+  garde_enfants: '#ec4899',
+  transport: '#a855f7',
+  ecoute: '#f43f5e',
+  emploi: '#10b981',
+  alimentation: '#f59e0b',
+  animaux: '#84cc16',
+  education: '#eab308',
+  autre: '#6b7280',
 };
 
 function timeAgo(dateStr: string): string {
@@ -58,7 +51,6 @@ interface MissionCardProps {
 }
 
 export function MissionCard({ mission }: MissionCardProps) {
-  const categoryBgColor = CATEGORY_BG_COLORS[mission.category] ?? 'bg-gradient-to-br from-gray-400/90 to-gray-500/90';
   const categoryAccent = CATEGORY_ACCENT[mission.category] ?? '#6b7280';
 
   return (

@@ -103,6 +103,7 @@
     "confirmDelete": "Supprimer cette proposition ? Cette action est irréversible.",
     "confirmClose": "Proposition clôturée !",
     "none": "Aucune proposition trouvée",
+    "noneSubtitle": "Soyez le premier à proposer votre aide et rejoindre l'entraide.",
     "loading": "Chargement des propositions...",
     "typeLabel": "Type de proposition",
     "descPlaceholder": "Décrivez votre proposition en détail...",

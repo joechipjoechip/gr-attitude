@@ -33,14 +33,18 @@ const OFFER_TYPE_COLORS: Record<OfferType, string> = {
 };
 
 const CATEGORY_ACCENT: Record<MissionCategory, string> = {
-  sante: '#6366f1',
-  logement: '#10b981',
-  alimentation: '#f97316',
-  emploi: '#ec4899',
-  education: '#eab308',
+  demenagement: '#8b5cf6',
+  bricolage: '#f97316',
+  numerique: '#3b82f6',
   administratif: '#06b6d4',
-  mobilite: '#a855f7',
-  lien_social: '#f43f5e',
+  garde_enfants: '#ec4899',
+  transport: '#a855f7',
+  ecoute: '#f43f5e',
+  emploi: '#10b981',
+  alimentation: '#f59e0b',
+  animaux: '#84cc16',
+  education: '#eab308',
+  autre: '#6b7280',
 };
 
 function timeAgo(dateStr: string): string {

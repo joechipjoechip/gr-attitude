@@ -31,6 +31,7 @@ const OFFER_TYPE_ICONS: Partial<Record<OfferType, string>> = {
   [OfferType.MATERIEL]: '🧰',
   [OfferType.SERVICE]: '🤲',
   [OfferType.ECOUTE]: '👂',
+  [OfferType.AUTRE]: '✨',
 };
 
 export default function NewOfferPage() {

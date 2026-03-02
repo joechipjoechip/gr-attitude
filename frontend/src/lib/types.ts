@@ -62,6 +62,7 @@ export enum OfferType {
   MATERIEL = 'materiel',
   SERVICE = 'service',
   ECOUTE = 'ecoute',
+  AUTRE = 'autre',
 }
 
 export enum OfferStatus {
@@ -278,6 +279,7 @@ export const OFFER_TYPE_LABELS: Record<OfferType, string> = {
   [OfferType.MATERIEL]: 'Materiel',
   [OfferType.SERVICE]: 'Service',
   [OfferType.ECOUTE]: 'Ecoute',
+  [OfferType.AUTRE]: 'Autre',
 };
 
 export const VISIBILITY_LABELS: Record<Visibility, string> = {

@@ -49,6 +49,7 @@ export enum OfferType {
   MATERIEL = 'materiel',
   SERVICE = 'service',
   ECOUTE = 'ecoute',
+  AUTRE = 'autre',
 }
 
 export enum OfferStatus {
